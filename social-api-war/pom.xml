@@ -2,7 +2,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>social-api-war</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
 	<parent>
@@ -12,7 +11,6 @@
     </parent>
     
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -33,17 +31,36 @@
 	</build>
 
 	<dependencies>
+		<!-- Amundi Internal Services -->
 		<dependency>
 			<groupId>com.amundi.services</groupId>
 			<artifactId>amundi-services-server</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.amundi.services</groupId>
-			<artifactId>amundi-services-client</artifactId>
+			<groupId>com.amundi</groupId>
+			<artifactId>social-api-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.amundi</groupId>
+			<artifactId>social-api-core</artifactId>
+		</dependency>
+		<!-- Outer dependencies -->
 		<dependency>
 			<groupId>axis</groupId>
 			<artifactId>axis-wsdl4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+		   <groupId>org.jboss.logging</groupId>
+		   <artifactId>jboss-logging</artifactId>
+		   <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
 	</dependencies>
 </project>
