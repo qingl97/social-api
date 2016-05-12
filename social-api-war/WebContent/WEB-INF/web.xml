@@ -2,11 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>social-api-war</display-name>
   
-  <!-- <servlet>
-      <servlet-name>Social API Resources</servlet-name>
-      <servlet-class>com.amundi.social.application.ApiServer</servlet-class>
-  </servlet> -->
-  
   <servlet-mapping>
     <servlet-name>com.amundi.social.application.ApiServer</servlet-name>
     <url-pattern>/api/*</url-pattern>
@@ -20,4 +15,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/**/*context.xml</param-value>
+  </context-param>
+  
+  <!-- <listener>
+      <listener-class>
+          org.springframework.web.context.ContextLoaderListener
+      </listener-class>
+  </listener> -->
 </web-app>

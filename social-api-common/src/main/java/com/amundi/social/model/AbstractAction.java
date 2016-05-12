@@ -2,11 +2,17 @@ package com.amundi.social.model;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public abstract class AbstractAction implements IAction {
 	
+	@JsonProperty("productId")
 	private String productId;
+	@JsonProperty("appId")
 	private String appId;
+	@JsonProperty("userId")
 	private String userId;
+	@JsonProperty("timestamp")
 	private DateTime ts;
 	
 	@Override
