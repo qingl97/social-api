@@ -7,4 +7,15 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>social-api-repo</artifactId>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.amundi</groupId>
+			<artifactId>social-api-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+	</dependencies>
 </project>
