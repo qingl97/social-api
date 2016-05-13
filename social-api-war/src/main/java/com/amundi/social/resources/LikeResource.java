@@ -20,9 +20,9 @@ import org.apache.log4j.Logger;
 
 import com.amundi.services.server.security.authenticator.session.DeprecatedHttpSessionAuthenticator;
 import com.amundi.social.application.SocialAPISecurityConfig;
-import com.amundi.social.model.Like;
-import com.amundi.social.service.api.LikeService;
-import com.amundi.social.service.impl.LikeServiceImpl;
+import com.amundi.social.common.model.Like;
+import com.amundi.social.common.providers.ILikeProvider;
+import com.amundi.social.core.providers.impl.LikeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -38,7 +38,7 @@ public class LikeResource extends AbstractActionResource {
 	
 	private static final Logger LOGGER = Logger.getLogger(LikeResource.class);
 	
-	private LikeService likeService = new LikeServiceImpl();
+	private ILikeProvider likeService = new LikeService();
 
 	@PUT @Path("/app/{appId}/product/{product_id}")
 	@Produces(MediaType.APPLICATION_JSON)
