@@ -2,8 +2,8 @@ package com.amundi.social.common.model;
 
 public class Follow extends AbstractAction {
 
-	public Follow(IEntity target, String userId) {
-		super(target, userId);
+	public Follow(String appId, String productId, String userId) {
+		super(appId, productId, userId);
 	}
 
 	@Override

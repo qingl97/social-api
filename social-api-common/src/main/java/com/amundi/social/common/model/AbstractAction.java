@@ -2,27 +2,42 @@ package com.amundi.social.common.model;
 
 import org.joda.time.DateTime;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public abstract class AbstractAction implements IAction {
 
-	private IEntity target;
-	@JsonProperty("userId")
+	private String appId;
+	private String productId;
 	private String userId;
-	@JsonProperty("timestamp")
-	private DateTime ts;
+	private DateTime timestamp;
 	
-	public AbstractAction(IEntity target, String userId) {
-		this.target = target;
+	public AbstractAction() {
+		
+	}
+	
+	public AbstractAction(String appId, String productId, String userId) {
+		this.appId = appId;
+		this.productId = productId;
 		this.userId = userId;
-		this.ts = DateTime.now();
+		this.timestamp = DateTime.now();
 	}
 	
 	@Override
-	public IEntity getTarget() {
-		return target;
+	public String getAppId() {
+		return appId;
 	}
-	
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	@Override
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
 	@Override
 	public String getUserId() {
 		return userId;
@@ -34,10 +49,10 @@ public abstract class AbstractAction implements IAction {
 	
 	@Override
 	public DateTime getTimestamp() {
-		return ts;
+		return timestamp;
 	}
 	
 	public void setTimestamp(DateTime ts) {
-		this.ts = ts;
+		this.timestamp = ts;
 	}
 }

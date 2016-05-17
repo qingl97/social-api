@@ -9,7 +9,8 @@ public interface IAction {
 	}
 
 	ActionType getType();
-	IEntity getTarget();
+	String getAppId();
+	String getProductId();
 	String getUserId();
 	DateTime getTimestamp();
 }
