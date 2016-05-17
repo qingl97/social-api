@@ -2,8 +2,6 @@ package com.amundi.social.resources;
 
 import java.util.List;
 
-import javax.security.auth.login.FailedLoginException;
-import javax.security.auth.login.LoginException;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -15,23 +13,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.amundi.services.server.security.authenticator.session.DeprecatedHttpSessionAuthenticator;
-import com.amundi.social.application.SocialAPISecurityConfig;
 import com.amundi.social.common.model.Like;
 import com.amundi.social.common.providers.ILikeProvider;
 import com.amundi.social.core.providers.impl.LikeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.active.services.common.RequestContextResolver;
-import net.active.services.server.RequestContextResolverImpl;
-import net.active.services.server.security.core.DefaultSubject;
 import net.active.services.server.security.core.annotation.NeedsAuthentication;
-import net.active.services.server.security.core.authenticator.HttpAuthenticator;
-import net.active.services.server.security.core.authenticator.basic.HttpBasicCustomAuthenticator;
 
 @Path("likes")
 public class LikeResource extends AbstractActionResource {
@@ -60,24 +50,6 @@ public class LikeResource extends AbstractActionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getLikes(@Context HttpHeaders headers) {
 		try {
-			RequestContextResolverImpl requestContextResolverImpl= 
-					(RequestContextResolverImpl) RequestContextResolver.getInstance();
-			if(!StringUtils.isBlank(
-					requestContextResolverImpl.getHttpHeaders().getHeaderString(HttpHeaders.AUTHORIZATION))){
-				try {
-					HttpAuthenticator httpAuthenticator=new DeprecatedHttpSessionAuthenticator.Builder(
-							new HttpBasicCustomAuthenticator()).useXsrfToken(false).build();
-					DefaultSubject defaultSubject = 
-							httpAuthenticator.authenticate(
-									SocialAPISecurityConfig.REALM, 
-									requestContextResolverImpl.getContainerRequestContext());
-				} catch (FailedLoginException e) {
-					e.printStackTrace();
-				} catch (LoginException e) {
-					e.printStackTrace();
-				}
-			}
-			
 			String appId = getAppId(headers);
 			String jsonLikes = null;
 			List<Like> likes;
