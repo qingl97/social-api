@@ -9,10 +9,11 @@ public interface ILikeDao {
 
 	List<Like> getAll();
 	List<Like> getLikesByUser(String userId);
+	List<Like> getLikesByUserApplication(String userId, String appId);
 	List<Like> getLikesByApplication(String appId);
 	List<Like> getLikesByProduct(String appId, String productId);
 	
-	void add(String appId, String productId, String userId);
+	int add(String appId, String productId, String userId);
 	void delete(String appId, String productId, String userId);
 	
 	Map<String, List<Like>> getLikesByUsers(List<String> userIds); 
