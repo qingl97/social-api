@@ -16,6 +16,15 @@ public interface ILikeProvider {
 	void doLike(String userId, String appId, String productId);
 	
 	/**
+	 * User undo a like on a product of an application.
+	 * 
+	 * @param userId
+	 * @param appId
+	 * @param productId
+	 */
+	void undoLike(String userId, String appId, String productId);
+	
+	/**
 	 * Get all likes.
 	 * 
 	 * @return
