@@ -51,7 +51,7 @@ public abstract class AbstractActionResource extends AbstractResource {
 	}
 	
 	protected String getUserId() {
-		System.out.println(SecurityManager.getSubject().getPrimaryPrincipal().getName());
+		LOGGER.info(SecurityManager.getSubject().getPrimaryPrincipal().getName());
 		return SecurityManager.getSubject().getPrimaryPrincipal().getName();
 	}
 }
