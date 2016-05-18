@@ -15,6 +15,12 @@
 		select app_id, product_id, sum(if(type = 1, 1, 0)) as nbLikes, sum(if(type = 2, 1, 0)) as nbFavorites, sum(if(type = 3, 1, 0)) as nbFollows 
 	</sql>
 	
+	<select id="getAll" resultMap="result">
+		<include refid="columns"/>
+		from actions
+		group by app_id, product_id;
+	</select>
+	
 	<select id="getByProduct" resultMap="result">
 		<include refid="columns"/>
 		from actions

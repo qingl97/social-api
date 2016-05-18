@@ -10,24 +10,25 @@ import com.amundi.social.repo.dao.IProductDao;
 import com.amundi.social.repo.dao.mappers.ProductMapper;
 
 public class ProductDaoImpl implements IProductDao {
+	
+	@Override
+	public List<IProduct> getAll() {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
+			return session.getMapper(ProductMapper.class).getAll();
+		}
+	}
 
 	@Override
 	public List<IProduct> get(String appId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(ProductMapper.class).getByApplication(appId);
-		} finally {
-			session.close();
 		}
 	}
 
 	@Override
 	public IProduct get(String appId, String productId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(ProductMapper.class).getByProduct(appId, productId);
-		} finally {
-			session.close();
 		}
 	}
 

@@ -6,6 +6,7 @@ import com.amundi.social.common.model.IProduct;
 
 public interface IProductDao {
 
+	List<IProduct> getAll();
 	List<IProduct> get(String appId);
 	IProduct get(String appId, String productId);
 }

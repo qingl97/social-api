@@ -10,4 +10,5 @@ public interface ProductMapper {
 
 	IProduct getByProduct(@Param("appId") String appId, @Param("productId") String productId);
 	List<IProduct> getByApplication(@Param("appId") String appId);
+	List<IProduct> getAll();
 }
