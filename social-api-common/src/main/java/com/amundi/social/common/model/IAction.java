@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 public interface IAction {
 	
-	enum ActionType {
+	public enum ActionType {
 		LIKE, FOLLOW, FAVORITE, COMMENT
 	}
 
