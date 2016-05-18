@@ -3,7 +3,7 @@ package com.amundi.social.common.model;
 import java.math.BigDecimal;
 
 /**
- * An entity is what a social action is operated on.
+ * The entity that a social action is operated on.
  * 
  * @author liang
  *
@@ -42,10 +42,12 @@ public class Product implements IProduct {
 		return this.id;
 	}
 	
+	@Override
 	public String getAppId() {
 		return this.appId;
 	}
 	
+	@Override
 	public String getProductId() {
 		return this.productId;
 	}
