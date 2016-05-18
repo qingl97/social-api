@@ -9,14 +9,14 @@ public class ProductServiceTest {
 	@Test
 	public void testGetProductsByApplication() {
 		String appId = "DGC";
-		productService.getProductsByApplication(appId);
+		productService.get(appId);
 	}
 
 	@Test
 	public void testGetProduct() {
 		String appId = "DGC";
 		String productId = "DGC-001";
-		productService.getProduct(appId, productId);
+		productService.get(appId, productId);
 	}
 
 }
