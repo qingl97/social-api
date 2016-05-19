@@ -10,11 +10,12 @@ import javax.ws.rs.core.UriInfo;
 
 import org.apache.log4j.Logger;
 
-import com.amundi.social.common.model.Like;
+import com.amundi.social.common.model.IAction;
+import com.amundi.social.common.model.IAction.ActionType;
+import com.amundi.social.common.providers.IActivityProvider;
 import com.amundi.social.common.providers.IProductProvider;
-import com.amundi.social.common.providers.IUserProvider;
+import com.amundi.social.core.providers.impl.ActivityService;
 import com.amundi.social.core.providers.impl.ProductService;
-import com.amundi.social.core.providers.impl.UserService;
 import com.amundi.social.rest.resources.AbstractActionResource;
 import com.amundi.social.rest.resources.LikeResource;
 
@@ -22,19 +23,19 @@ public class LikeResourceImpl extends AbstractActionResource implements LikeReso
 	
 	private static final Logger LOGGER = Logger.getLogger(LikeResourceImpl.class);
 	
-	private IUserProvider userService = new UserService();
+	private IActivityProvider activityService = new ActivityService();
 	private IProductProvider productService = new ProductService();
 
 	@Override
 	public Response doLike(String userId, String appId, String productId) {
-		userService.doLike(userId, appId, productId);
+		activityService.doAction(userId, appId, productId, ActionType.LIKE);
 		LOGGER.info("user " + userId + " did like on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
 
 	@Override
 	public Response undoLike(String userId, String appId, String productId) {
-		userService.undoLike(userId, appId, productId);
+		activityService.undoAction(userId, appId, productId, ActionType.LIKE);
 		LOGGER.info("user " + userId + " undo like on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
@@ -42,7 +43,7 @@ public class LikeResourceImpl extends AbstractActionResource implements LikeReso
 	@Override
 	public Response getAll(boolean detail) {
 		List<? extends Object> ret;
-		ret = detail ? userService.getLikes() : productService.getAll();
+		ret = detail ? activityService.get(ActionType.LIKE) : productService.getAll();
 		return buildDefaultJsonFormatResponse(ret);
 	}
 
@@ -64,19 +65,19 @@ public class LikeResourceImpl extends AbstractActionResource implements LikeReso
 		appId = params.containsKey("app") ? params.get("app").get(0) : null;
 		productId = params.containsKey("product") ? params.get("product").get(0) : null;
 		
-		List<Object> ret = new ArrayList<>();
+		List<IAction> ret = new ArrayList<>();
 		
 		if(appId == null && productId == null) {
-			ret.addAll(userService.getLikes(userId));
+			ret.addAll(activityService.get(userId, ActionType.LIKE));
 		}
 		if(appId == null && productId != null) {
 			return Response.status(Status.BAD_REQUEST).entity("product_id should be provided with existence of app_id").build();
 		}
 		if(appId != null && productId == null) {
-			ret.addAll(userService.getLikes(userId, appId));
+			ret.addAll(activityService.get(userId, appId, ActionType.LIKE));
 		}
 		if(appId != null && productId != null) {
-			Like like = userService.getLike(userId, appId, productId);
+			IAction like = activityService.get(userId, appId, productId, ActionType.LIKE);
 			if(like != null)
 				ret.add(like);
 		}
