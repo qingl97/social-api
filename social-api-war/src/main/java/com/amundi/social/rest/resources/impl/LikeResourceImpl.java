@@ -1,4 +1,4 @@
-package com.amundi.social.resources.impl;
+package com.amundi.social.rest.resources.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import com.amundi.social.common.providers.IProductProvider;
 import com.amundi.social.common.providers.IUserProvider;
 import com.amundi.social.core.providers.impl.ProductService;
 import com.amundi.social.core.providers.impl.UserService;
-import com.amundi.social.resources.AbstractActionResource;
-import com.amundi.social.resources.LikeResource;
+import com.amundi.social.rest.resources.AbstractActionResource;
+import com.amundi.social.rest.resources.LikeResource;
 
 public class LikeResourceImpl extends AbstractActionResource implements LikeResource {
 	

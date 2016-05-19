@@ -1,10 +1,10 @@
-package com.amundi.social.application;
+package com.amundi.social.rest.application;
 
 import javax.ws.rs.ApplicationPath;
 
 import com.amundi.services.server.AmundiApplication;
 import com.amundi.services.server.config.security.AmundiSecurityFeatureConfig;
-import com.amundi.social.resources.impl.LikeResourceImpl;
+import com.amundi.social.rest.resources.impl.LikeResourceImpl;
 
 import net.active.services.server.util.filter.CorsFilter;
 

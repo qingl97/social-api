@@ -1,4 +1,4 @@
-package com.amundi.social.resources;
+package com.amundi.social.rest.resources;
 
 import javax.security.auth.login.LoginException;
 import javax.ws.rs.core.HttpHeaders;
@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.amundi.services.server.security.authenticator.session.DeprecatedHttpSessionAuthenticator;
-import com.amundi.social.application.SocialAPISecurityConfig;
-import com.amundi.social.resources.util.JsonUtil;
+import com.amundi.social.rest.application.SocialAPISecurityConfig;
+import com.amundi.social.rest.resources.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import net.active.services.common.RequestContextResolver;

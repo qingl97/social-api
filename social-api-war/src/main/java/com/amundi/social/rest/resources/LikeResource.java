@@ -1,4 +1,4 @@
-package com.amundi.social.resources;
+package com.amundi.social.rest.resources;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

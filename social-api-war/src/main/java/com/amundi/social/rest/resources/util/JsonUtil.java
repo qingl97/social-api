@@ -1,4 +1,4 @@
-package com.amundi.social.resources.util;
+package com.amundi.social.rest.resources.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
