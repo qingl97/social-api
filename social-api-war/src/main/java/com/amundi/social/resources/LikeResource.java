@@ -31,7 +31,7 @@ public interface LikeResource {
 	@GET
 	public Response getAll(@QueryParam("detail") boolean detail);
 	
-	@GET 
+	@GET
 	@Path("/app/{app_id}")
 	public Response getByApplication(@PathParam("app_id") String appId);
 	

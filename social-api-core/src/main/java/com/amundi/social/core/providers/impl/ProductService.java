@@ -46,7 +46,7 @@ public class ProductService implements IProductProvider {
 	public List<? extends AbstractAction> getSocialStatus(String appId, String productId, ActionType type) {
 		switch(type) {
 			case LIKE:
-				return likeDao.getLikesByProduct(appId, productId);
+				return likeDao.getByProduct(appId, productId);
 			case FAVORITE:
 				
 			case FOLLOW:

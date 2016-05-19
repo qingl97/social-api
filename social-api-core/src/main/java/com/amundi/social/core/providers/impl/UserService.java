@@ -16,7 +16,7 @@ public class UserService implements IUserProvider {
 
 	@Override
 	public List<Like> getLikes(String userId) {
-		return likeDao.getLikesByUser(userId);
+		return likeDao.getByUser(userId);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class UserService implements IUserProvider {
 
 	@Override
 	public List<Like> getLikes(String userId, String appId) {
-		return likeDao.getLikesByUserApplication(userId, appId);
+		return likeDao.getByUserApplication(userId, appId);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class UserService implements IUserProvider {
 
 	@Override
 	public void doLike(String userId, String appId, String productId) {
-		List<Like> likes = likeDao.getLikesByUserApplication(userId, appId);
+		List<Like> likes = likeDao.getByUserApplication(userId, appId);
 		for(Like like : likes) {
 			if(like.getProductId().equalsIgnoreCase(productId))
 				return;
@@ -89,7 +89,7 @@ public class UserService implements IUserProvider {
 
 	@Override
 	public void undoLike(String userId, String appId, String productId) {
-		List<Like> likes = likeDao.getLikesByUserApplication(userId, appId);
+		List<Like> likes = likeDao.getByUserApplication(userId, appId);
 		for(Like like : likes) {
 			if(like.getProductId().equalsIgnoreCase(productId))
 				likeDao.delete(appId, productId, userId);
@@ -133,7 +133,7 @@ public class UserService implements IUserProvider {
 
 	@Override
 	public Like getLike(String userId, String appId, String productId) {
-		List<Like> likes = likeDao.getLikesByProduct(appId, productId);
+		List<Like> likes = likeDao.getByProduct(appId, productId);
 		for(Like like : likes) {
 			if(like.getUserId().equals(userId))
 				return like;
