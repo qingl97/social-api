@@ -15,88 +15,64 @@ public class LikeDaoImpl implements ILikeDao {
 	
 	@Override
 	public List<Like> getLikesByUser(String userId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(LikeMapper.class).getByUser(userId);
-		} finally {
-			session.close();
 		}
 	}
 	
 	@Override
 	public List<Like> getLikesByUserApplication(String userId, String appId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(LikeMapper.class).getByUserApplication(userId, appId);
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	@Override
 	public Map<String, List<Like>> getLikesByUsers(List<String> userIds) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			Map<String, List<Like>> rst = new HashMap<>();
 			for(String userId : userIds) {
 				rst.put(userId, session.getMapper(LikeMapper.class).getByUser(userId));
 			}
 			return rst;
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	@Override
 	public List<Like> getAll() {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(LikeMapper.class).getAll();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	@Override
 	public List<Like> getLikesByApplication(String appId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			return session.getMapper(LikeMapper.class).getByApplication(appId);
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	@Override
 	public List<Like> getLikesByProduct(String appId, String productId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			List<Like> rst = session.getMapper(LikeMapper.class).getByProduct(appId, productId);
 			return rst;
-		} finally {
-			session.close();
 		}
 	}
 	
 	@Override
 	public int add(String appId, String productId, String userId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			int id = session.getMapper(LikeMapper.class).add(appId, productId, userId);
 			session.commit();
 			return id;
-		} finally {
-			session.close();
 		}
 	}
 
 	@Override
 	public void delete(String appId, String productId, String userId) {
-		SqlSession session = SqlSessionProvider.openSession();
-		try {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
 			session.getMapper(LikeMapper.class).delete(appId, productId, userId);
-		} finally {
-			session.close();
 		}
 	}
 	

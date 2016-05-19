@@ -2,6 +2,8 @@ package com.amundi.social.common.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The entity that a social action is operated on.
  * 
@@ -10,6 +12,7 @@ import java.math.BigDecimal;
  */
 public class Product implements IProduct {
 	
+	@JsonIgnore
 	private String id;
 	private String appId;
 	private String productId;

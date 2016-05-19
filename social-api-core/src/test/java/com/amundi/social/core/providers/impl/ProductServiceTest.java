@@ -2,9 +2,11 @@ package com.amundi.social.core.providers.impl;
 
 import org.junit.Test;
 
+import com.amundi.social.common.providers.IProductProvider;
+
 public class ProductServiceTest {
 	
-	private ProductService productService = new ProductService();
+	private IProductProvider productService = new ProductService();
 
 	@Test
 	public void testGetProductsByApplication() {
