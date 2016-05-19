@@ -4,7 +4,7 @@ import javax.ws.rs.ApplicationPath;
 
 import com.amundi.services.server.AmundiApplication;
 import com.amundi.services.server.config.security.AmundiSecurityFeatureConfig;
-import com.amundi.social.resources.LikeResource;
+import com.amundi.social.resources.impl.LikeResourceImpl;
 
 import net.active.services.server.util.filter.CorsFilter;
 
@@ -17,7 +17,7 @@ public class ApiServer extends AmundiApplication {
 	
 	public ApiServer() {
 		registerResources(CorsFilter.class);
-		registerResources(LikeResource.class);
+		registerResources(LikeResourceImpl.class);
 	}
 	
 	@Override
