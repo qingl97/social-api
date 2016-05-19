@@ -15,23 +15,23 @@
 	</sql>
 
 	<!-- Selects -->
-	<select id="getAll" resultMap="result">
+	<select id="fetchAll" resultMap="result">
 		<include refid="allLikes" />
 	</select>
 
-	<select id="getByApplication" resultMap="result">
+	<select id="fetchByApplication" resultMap="result">
 		<include refid="allLikes" /> and app_id = #{appId};
 	</select>
 	
-	<select id="getByProduct" resultMap="result">
+	<select id="fetchByProduct" resultMap="result">
 		<include refid="allLikes" /> and app_id = #{appId} and product_id = #{productId};
 	</select>
 	
-	<select id="getByUser" resultMap="result">
+	<select id="fetchByUser" resultMap="result">
 		<include refid="allLikes" /> and user_id = #{userId};
 	</select>
 	
-	<select id="getByUserApplication" resultMap="result"> 
+	<select id="fetchByUserApplication" resultMap="result"> 
 		<include refid="allLikes" /> and user_id = #{userId} and app_id = #{appId};
 	</select>
 	
