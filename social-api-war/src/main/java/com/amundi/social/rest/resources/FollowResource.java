@@ -4,11 +4,10 @@ import javax.ws.rs.Path;
 
 import com.amundi.social.common.model.IAction.ActionType;
 
-@Path("like")
-public class LikeResource extends AbstractCommonResource {
-
-	public LikeResource() {
-		super(ActionType.LIKE);
+@Path("follow")
+public class FollowResource extends AbstractCommonResource {
+	
+	public FollowResource() {
+		super(ActionType.FOLLOW);
 	}
-
 }

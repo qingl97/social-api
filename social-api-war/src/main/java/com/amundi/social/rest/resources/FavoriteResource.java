@@ -4,11 +4,11 @@ import javax.ws.rs.Path;
 
 import com.amundi.social.common.model.IAction.ActionType;
 
-@Path("like")
-public class LikeResource extends AbstractCommonResource {
+@Path("favorite")
+public class FavoriteResource extends AbstractCommonResource {
 
-	public LikeResource() {
-		super(ActionType.LIKE);
+	public FavoriteResource() {
+		super(ActionType.FAVORITE);
 	}
 
 }
