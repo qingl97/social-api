@@ -9,14 +9,22 @@
 		<result property = "nbLikes" column = "nbLikes" javaType="int" />
 		<result property = "nbFavorites" column = "nbFavorites" javaType="int" />
 		<result property = "nbFollows" column = "nbFollows" javaType="int" />
+		<result property = "nbComments" column = "nbComments" javaType="int" />
 	</resultMap>
 	
 	<sql id="columns">
-		select app_id, product_id, sum(if(type = 1, 1, 0)) as nbLikes, sum(if(type = 2, 1, 0)) as nbFavorites, sum(if(type = 3, 1, 0)) as nbFollows 
+		select app_id, product_id, sum(if(type = 1, 1, 0)) as nbLikes, sum(if(type = 2, 1, 0)) as nbFavorites, sum(if(type = 3, 1, 0)) as nbFollows, sum(if(type = 4, 1, 0)) as nbComments 
 	</sql>
 	
 	<select id="getAll" resultMap="result">
 		<include refid="columns"/>
+		from actions
+		group by app_id, product_id;
+	</select>
+	
+	<select id="getAllByType" resultMap="result">
+		<include refid="columns"/>
+		select app_id, product_id, sum(if(type = #{type}, 1, 0)) as count
 		from actions
 		group by app_id, product_id;
 	</select>

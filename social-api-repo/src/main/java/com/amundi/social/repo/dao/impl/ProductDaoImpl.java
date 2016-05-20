@@ -4,12 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.amundi.social.common.model.IAction.ActionType;
 import com.amundi.social.common.model.IProduct;
 import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IProductDao;
 import com.amundi.social.repo.dao.mappers.ProductMapper;
 
 public class ProductDaoImpl implements IProductDao {
+	
+	@Override
+	public List<IProduct> getAll(ActionType type) {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
+			return session.getMapper(ProductMapper.class).getAllByType(type.val);
+		}
+	}
 	
 	@Override
 	public List<IProduct> getAll() {
@@ -31,5 +39,4 @@ public class ProductDaoImpl implements IProductDao {
 			return session.getMapper(ProductMapper.class).getByProduct(appId, productId);
 		}
 	}
-
 }
