@@ -50,6 +50,6 @@
 	
 	<!-- Delete -->
 	<delete id="delete">
-		delete from actions where type = 4 and app_id = #{appId} and product_id = #{product_id} and user_id = #{userId};
+		delete from actions where type = 4 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
 </mapper>
