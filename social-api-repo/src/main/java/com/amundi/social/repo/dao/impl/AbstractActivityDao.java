@@ -64,7 +64,9 @@ public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
 	@Override
 	public int add(String appId, String productId, String userId) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
-			return session.getMapper(mapper).add(userId, appId, productId);
+			int activityId = session.getMapper(mapper).add(userId, appId, productId);
+			session.commit();
+			return activityId;
 		}
 	}
 
@@ -72,6 +74,7 @@ public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
 	public void delete(String appId, String productId, String userId) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
 			session.getMapper(mapper).delete(userId, appId, productId);
+			session.commit();
 		}
 	}
 
