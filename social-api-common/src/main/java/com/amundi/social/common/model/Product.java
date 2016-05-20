@@ -19,6 +19,7 @@ public class Product implements IProduct {
 	private int nbLikes;
 	private int nbFavorites;
 	private int nbFollows;
+	private int nbComments;
 
 	public Product(String appId, String productId) {
 		this.appId = appId;
@@ -26,18 +27,20 @@ public class Product implements IProduct {
 		this.id = IdentityBuilder.build(appId, productId);
 	}
 	
-	public Product(String appId, String productId, int nbLikes, int nbFavorites, int nbFollows) {
+	public Product(String appId, String productId, int nbLikes, int nbFavorites, int nbFollows, int nbComments) {
 		this(appId, productId);
 		this.nbLikes = nbLikes;
 		this.nbFavorites = nbFavorites;
 		this.nbFollows = nbFollows;
+		this.nbComments = nbComments;
 	}
 	
-	public Product(String appId, String productId, BigDecimal nbLikes, BigDecimal nbFavorites, BigDecimal nbFollows) {
+	public Product(String appId, String productId, BigDecimal nbLikes, BigDecimal nbFavorites, BigDecimal nbFollows, BigDecimal nbComments) {
 		this(appId, productId);
 		this.nbLikes = nbLikes.intValue();
 		this.nbFavorites = nbFavorites.intValue();
 		this.nbFollows = nbFollows.intValue();
+		this.nbComments = nbComments.intValue();
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class Product implements IProduct {
 		return this.productId;
 	}
 
+	@Override
 	public int getNbLikes() {
 		return nbLikes;
 	}
@@ -63,6 +67,7 @@ public class Product implements IProduct {
 		this.nbLikes = nbLikes;
 	}
 
+	@Override
 	public int getNbFavorites() {
 		return nbFavorites;
 	}
@@ -71,12 +76,22 @@ public class Product implements IProduct {
 		this.nbFavorites = nbFavorites;
 	}
 
+	@Override
 	public int getNbFollows() {
 		return nbFollows;
 	}
 
 	public void setNbFollows(int nbFollows) {
 		this.nbFollows = nbFollows;
+	}
+	
+	public void setNbComments(int nbComments) {
+		this.nbComments = nbComments;
+	}
+	
+	@Override
+	public int getNbComments() {
+		return nbComments;
 	}
 
 }

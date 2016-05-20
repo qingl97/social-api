@@ -4,6 +4,10 @@ public class Comment extends AbstractAction {
 	
 	private int note;
 	
+	public Comment() {
+		super();
+	}
+	
 	public Comment(String appId, String productId, String userId, int note) {
 		super(appId, productId, userId);
 		this.note = note;

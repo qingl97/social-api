@@ -8,4 +8,5 @@ public interface IProduct {
 	int getNbLikes();
 	int getNbFavorites();
 	int getNbFollows();
+	int getNbComments();
 }

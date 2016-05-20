@@ -8,7 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public interface IAction {
 	
 	public enum ActionType {
-		LIKE, FOLLOW, FAVORITE, COMMENT
+		LIKE(1), FOLLOW(2), FAVORITE(3), COMMENT(4);
+		
+		public int val;
+		
+		ActionType(int val) {this.val = val;}
 	}
 
 	@JsonIgnore
