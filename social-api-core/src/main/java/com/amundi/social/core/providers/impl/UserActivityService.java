@@ -6,25 +6,12 @@ import org.apache.log4j.Logger;
 
 import com.amundi.social.common.model.IAction;
 import com.amundi.social.common.model.IAction.ActionType;
-import com.amundi.social.common.providers.IActivityProvider;
-import com.amundi.social.repo.dao.ICommentDao;
-import com.amundi.social.repo.dao.IFavoriteDao;
-import com.amundi.social.repo.dao.IFollowDao;
+import com.amundi.social.common.providers.IUserActivityProvider;
 import com.amundi.social.repo.dao.IGenericActivityDao;
-import com.amundi.social.repo.dao.ILikeDao;
-import com.amundi.social.repo.dao.impl.CommentDaoImpl;
-import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
-import com.amundi.social.repo.dao.impl.FollowDaoImpl;
-import com.amundi.social.repo.dao.impl.LikeDaoImpl;
 
-public class ActivityService implements IActivityProvider {
+public class UserActivityService extends AbstractService implements IUserActivityProvider {
 	
-	private static final Logger LOGGER = Logger.getLogger(ActivityService.class);
-
-	private ILikeDao likeDao = new LikeDaoImpl();
-	private IFollowDao followDao = new FollowDaoImpl();
-	private IFavoriteDao favoriteDao = new FavoriteDaoImpl();
-	private ICommentDao commentDao = new CommentDaoImpl();
+	private static final Logger LOGGER = Logger.getLogger(UserActivityService.class);
 
 	@Override
 	public void doAction(String userId, String appId, String productId, ActionType type) {
@@ -80,17 +67,5 @@ public class ActivityService implements IActivityProvider {
 	public List<? extends IAction> get(String userId, ActionType type) {
 		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
 		return dao.getByUser(userId);
-	}
-	
-	private IGenericActivityDao<? extends IAction> getConcreteDao(ActionType type) {
-		if(type == ActionType.LIKE)
-			return likeDao;
-		if(type == ActionType.FAVORITE)
-			return favoriteDao;
-		if(type == ActionType.FOLLOW)
-			return followDao;
-		if(type == ActionType.COMMENT)
-			return commentDao;
-		throw new IllegalArgumentException();
 	}
 }
