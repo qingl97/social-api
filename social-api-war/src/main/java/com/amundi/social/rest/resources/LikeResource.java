@@ -29,6 +29,12 @@ public interface LikeResource {
 							 @PathParam("product_id") String productId);
 	
 	@GET
+	@Path("/user/{user_id}/app/{app_id}/product/{product_id}")
+	public Response get(@PathParam("user_id") String userId, 
+						   @PathParam("app_id") String appId,
+						   @PathParam("product_id") String productId);
+	
+	@GET
 	public Response getAll(@QueryParam("detail") boolean detail);
 	
 	@GET

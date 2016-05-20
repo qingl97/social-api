@@ -39,6 +39,12 @@ public class LikeResourceImpl extends AbstractActionResource implements LikeReso
 		LOGGER.info("user " + userId + " undo like on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
+	
+	@Override
+	public Response get(String userId, String appId, String productId) {
+		IAction like = activityService.get(userId, appId, productId, ActionType.LIKE);
+		return like == null ? Response.ok().entity("false").build() : Response.ok().entity("true").build();
+	}
 
 	@Override
 	public Response getAll(boolean detail) {
