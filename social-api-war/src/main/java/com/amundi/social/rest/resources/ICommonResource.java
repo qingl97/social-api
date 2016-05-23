@@ -23,7 +23,7 @@ public interface ICommonResource {
 	
 	@GET
 	@Path("/user/{user_id}/app/{app_id}/product/{product_id}")
-	public Response getUserActivities(@PathParam("user_id") String userId, @PathParam("app_id") String appId, @PathParam("product_id") String productId);
+	public Response getUserActivity(@PathParam("user_id") String userId, @PathParam("app_id") String appId, @PathParam("product_id") String productId);
 	
 	@PUT
 	@Path("/user/{user_id}/app/{app_id}/product/{product_id}")
