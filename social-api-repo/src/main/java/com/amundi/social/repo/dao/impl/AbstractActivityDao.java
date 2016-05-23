@@ -77,6 +77,14 @@ public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
 			session.commit();
 		}
 	}
+	
+	@Override
+	public void clear(String appId) {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
+			session.getMapper(mapper).clear(appId);
+			session.commit();
+		}
+	}
 
 	@Override
 	public Map<String, List<T>> getByUsers(List<String> userIds) {

@@ -17,4 +17,5 @@ public interface GenericActivityMapper<T> {
 	
 	int add(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
 	void delete(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
+	void clear(@Param("appId") String appId);
 }

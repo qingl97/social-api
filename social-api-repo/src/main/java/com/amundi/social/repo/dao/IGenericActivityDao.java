@@ -14,6 +14,7 @@ public interface IGenericActivityDao<T> {
 	
 	int add(String appId, String productId, String userId);
 	void delete(String appId, String productId, String userId);
+	void clear(String appId);
 	
 	Map<String, List<T>> getByUsers(List<String> userIds);
 }
