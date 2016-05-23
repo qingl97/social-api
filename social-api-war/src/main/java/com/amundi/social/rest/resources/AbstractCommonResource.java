@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import com.amundi.social.common.model.IAction;
 import com.amundi.social.common.model.IAction.ActionType;
 import com.amundi.social.common.providers.IProductProvider;
 import com.amundi.social.common.providers.IUserActivityProvider;
@@ -47,8 +48,9 @@ public abstract class AbstractCommonResource extends AbstractResource implements
 	}
 
 	@Override
-	public Response getUserActivities(String userId, String appId, String productId) {
-		return buildDefaultJsonFormatResponse(userActivityService.get(userId, appId, productId, type));
+	public Response getUserActivity(String userId, String appId, String productId) {
+		IAction activity = userActivityService.get(userId, appId, productId, type);
+		return activity != null ?  buildDefaultJsonFormatResponse(activity) : Response.ok().build();
 	}
 
 	@Override
