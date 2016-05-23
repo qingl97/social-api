@@ -7,8 +7,8 @@ import com.amundi.social.common.model.IActivity.ActionType;
 
 public interface IUserActivityProvider {
 	
-	void doAction(String userId, String appId, String productId, ActionType type);
-	void undoAction(String userId, String appId, String productId, ActionType type);
+	void add(String userId, String appId, String productId, ActionType type);
+	void remove(String userId, String appId, String productId, ActionType type);
 	
 	List<? extends IActivity> get(ActionType type);
 	IActivity get(String userId, String appId, String productId, ActionType type);

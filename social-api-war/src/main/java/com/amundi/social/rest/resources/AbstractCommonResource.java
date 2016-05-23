@@ -55,14 +55,14 @@ public abstract class AbstractCommonResource extends AbstractResource implements
 
 	@Override
 	public Response doAction(String userId, String appId, String productId) {
-		userActivityService.doAction(userId, appId, productId, type);
+		userActivityService.add(userId, appId, productId, type);
 		LOGGER.info("user " + userId + " does " + type.toString() + " on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
 
 	@Override
 	public Response undoAction(String userId, String appId, String productId) {
-		userActivityService.undoAction(userId, appId, productId, type);
+		userActivityService.remove(userId, appId, productId, type);
 		LOGGER.info("user " + userId + " undo " + type.toString() + " on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}

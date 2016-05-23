@@ -14,7 +14,7 @@ public class UserActivityService extends AbstractService implements IUserActivit
 	private static final Logger LOGGER = Logger.getLogger(UserActivityService.class);
 
 	@Override
-	public void doAction(String userId, String appId, String productId, ActionType type) {
+	public void add(String userId, String appId, String productId, ActionType type) {
 		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
 		for(IActivity activity : activities) {
@@ -27,7 +27,7 @@ public class UserActivityService extends AbstractService implements IUserActivit
 	}
 	
 	@Override
-	public void undoAction(String userId, String appId, String productId, ActionType type) {
+	public void remove(String userId, String appId, String productId, ActionType type) {
 		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
 		for(IActivity activity : activities) {
