@@ -18,26 +18,26 @@
 	
 	<select id="getAll" resultMap="result">
 		<include refid="columns"/>
-		from actions
+		from activities
 		group by app_id, product_id;
 	</select>
 	
 	<select id="getAllByType" resultMap="result">
 		<include refid="columns"/>
 		select app_id, product_id, sum(if(type = #{type}, 1, 0)) as count
-		from actions
+		from activities
 		group by app_id, product_id;
 	</select>
 	
 	<select id="getByProduct" resultMap="result">
 		<include refid="columns"/>
-		from actions
+		from activities
 		where app_id = #{appId} and product_id = #{productId}; 
 	</select>
 	
 	<select id="getByApplication" resultMap="result">
 		<include refid="columns"/>
-		from (select * from actions where app_id = #{appId}) as alias
+		from (select * from activities where app_id = #{appId}) as alias
 		group by product_id;
 	</select>
 </mapper>

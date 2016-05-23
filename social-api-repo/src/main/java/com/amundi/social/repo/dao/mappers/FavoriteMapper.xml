@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<sql id="all">
-		select * from actions where type = 2
+		select * from activities where type = 2
 	</sql>
 
 	<!-- Selects -->
@@ -41,7 +41,7 @@
 	
 	<!-- Insert -->
 	<insert id="add" parameterType="string" useGeneratedKeys="true" keyProperty="id">
-		insert into actions (type, app_id, product_id, user_id) values (2, #{appId}, #{productId}, #{userId});
+		insert into activities (type, app_id, product_id, user_id) values (2, #{appId}, #{productId}, #{userId});
 		
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 			select last_insert_id() as id
@@ -50,6 +50,11 @@
 	
 	<!-- Delete -->
 	<delete id="delete">
-		delete from actions where type = 2 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
+		delete from activities where type = 2 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
+	</delete>
+	
+	<!-- clear data -->
+	<delete id="clear">
+		delete from activities where type = 2 and app_id = #{appId};
 	</delete>
 </mapper>
