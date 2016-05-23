@@ -2,7 +2,7 @@ package com.amundi.social.repo.dao;
 
 import java.util.List;
 
-import com.amundi.social.common.model.IAction.ActionType;
+import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.model.IProduct;
 
 public interface IProductDao {

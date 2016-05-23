@@ -2,7 +2,7 @@ package com.amundi.social.common.model;
 
 import org.joda.time.DateTime;
 
-public abstract class AbstractAction implements IAction {
+public abstract class AbstractAction implements IActivity {
 
 	private String appId;
 	private String productId;

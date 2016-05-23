@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public interface IAction {
+public interface IActivity {
 	
 	public enum ActionType {
 		LIKE(1), FOLLOW(2), FAVORITE(3), COMMENT(4);

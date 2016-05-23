@@ -1,7 +1,7 @@
 package com.amundi.social.core.providers.impl;
 
-import com.amundi.social.common.model.IAction;
-import com.amundi.social.common.model.IAction.ActionType;
+import com.amundi.social.common.model.IActivity;
+import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.repo.dao.ICommentDao;
 import com.amundi.social.repo.dao.IFavoriteDao;
 import com.amundi.social.repo.dao.IFollowDao;
@@ -19,7 +19,7 @@ public abstract class AbstractService {
 	private IFavoriteDao favoriteDao = new FavoriteDaoImpl();
 	private ICommentDao commentDao = new CommentDaoImpl();
 
-	protected IGenericActivityDao<? extends IAction> getConcreteDao(ActionType type) {
+	protected IGenericActivityDao<? extends IActivity> getConcreteDao(ActionType type) {
 		if(type == ActionType.LIKE)
 			return likeDao;
 		if(type == ActionType.FAVORITE)

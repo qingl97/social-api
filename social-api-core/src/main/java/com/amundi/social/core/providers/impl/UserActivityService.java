@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.amundi.social.common.model.IAction;
-import com.amundi.social.common.model.IAction.ActionType;
+import com.amundi.social.common.model.IActivity;
+import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.providers.IUserActivityProvider;
 import com.amundi.social.repo.dao.IGenericActivityDao;
 
@@ -15,9 +15,9 @@ public class UserActivityService extends AbstractService implements IUserActivit
 
 	@Override
 	public void doAction(String userId, String appId, String productId, ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
-		List<? extends IAction> activities = dao.getByUserApplication(userId, appId);
-		for(IAction activity : activities) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
+		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
+		for(IActivity activity : activities) {
 			if(activity.getProductId().equalsIgnoreCase(productId)) {
 				LOGGER.debug("user already did " + type.toString() + ", operation ignored");
 				return;
@@ -28,9 +28,9 @@ public class UserActivityService extends AbstractService implements IUserActivit
 	
 	@Override
 	public void undoAction(String userId, String appId, String productId, ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
-		List<? extends IAction> activities = dao.getByUserApplication(userId, appId);
-		for(IAction activity : activities) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
+		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
+		for(IActivity activity : activities) {
 			if(activity.getProductId().equalsIgnoreCase(productId)) {
 				dao.delete(appId, productId, userId);
 				LOGGER.debug("undo " + type.toString() + " on product " + productId + " of app " + appId);
@@ -41,16 +41,16 @@ public class UserActivityService extends AbstractService implements IUserActivit
 	}
 	
 	@Override
-	public List<? extends IAction> get(ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
+	public List<? extends IActivity> get(ActionType type) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		return dao.getAll();
 	}
 	
 	@Override
-	public IAction get(String userId, String appId, String productId, ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
-		List<? extends IAction> activities = dao.getByProduct(appId, productId);
-		for(IAction activity : activities) {
+	public IActivity get(String userId, String appId, String productId, ActionType type) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
+		List<? extends IActivity> activities = dao.getByProduct(appId, productId);
+		for(IActivity activity : activities) {
 			if(activity.getUserId().equals(userId))
 				return activity;
 		}
@@ -58,14 +58,14 @@ public class UserActivityService extends AbstractService implements IUserActivit
 	}
 	
 	@Override
-	public List<? extends IAction> get(String userId, String appId, ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
+	public List<? extends IActivity> get(String userId, String appId, ActionType type) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		return dao.getByUserApplication(userId, appId);
 	}
 	
 	@Override
-	public List<? extends IAction> get(String userId, ActionType type) {
-		IGenericActivityDao<? extends IAction> dao = getConcreteDao(type);
+	public List<? extends IActivity> get(String userId, ActionType type) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		return dao.getByUser(userId);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.amundi.social.common.model.IAction.ActionType;
+import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.model.IProduct;
 import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IProductDao;
