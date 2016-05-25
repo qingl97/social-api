@@ -10,13 +10,13 @@ public class ProductServiceTest {
 
 	@Test
 	public void testGetProductsByApplication() {
-		String appId = "DGC";
+		String appId = "APP-1";
 		productService.get(appId);
 	}
 
 	@Test
 	public void testGetProduct() {
-		String appId = "DGC";
+		String appId = "APP-1";
 		String productId = "DGC-001";
 		productService.get(appId, productId);
 	}
