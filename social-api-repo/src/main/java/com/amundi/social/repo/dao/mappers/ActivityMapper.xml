@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amundi.social.repo.dao.mappers.ActivityMapper">
+	<resultMap type="com.amundi.social.common.model.GenericActivity" id="result">
+		<result property = "id" column = "id" javaType="int" />
+		<result property = "appId" column = "app_id" />
+		<result property = "productId" column = "product_id" />
+		<result property = "userId" column = "user_id" />
+		<result property = "timestamp" column = "creation_date" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
+		<result property = "type" column = "type" javaType="int" />
+	</resultMap>
+
+	<select id="fetchAll">
+		
+	</select>
+</mapper>
