@@ -10,7 +10,7 @@ public interface IActivity {
 	public enum ActionType {
 		LIKE(1), FOLLOW(2), FAVORITE(3), COMMENT(4);
 		
-		public int val;
+		private int val;
 		
 		ActionType(int val) {this.val = val;}
 		
