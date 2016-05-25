@@ -2,41 +2,56 @@ package com.amundi.social.common.model;
 
 import org.joda.time.DateTime;
 
-public abstract class AbstractAction implements IActivity {
-
+public class GenericActivity implements IActivity {
+	
 	private int id;
 	private String appId;
 	private String productId;
 	private String userId;
 	private DateTime timestamp;
-	
-	public AbstractAction() {
-		
+	private ActionType type;
+
+	public GenericActivity() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public AbstractAction(String appId, String productId, String userId) {
-		this.appId = appId;
-		this.productId = productId;
-		this.userId = userId;
-		this.timestamp = DateTime.now();
-	}
-	
-	@Override
-	public int getId() {
-		return this.id;
-	}
-	
+
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	@Override
-	public String getAppId() {
-		return appId;
 	}
 
 	public void setAppId(String appId) {
 		this.appId = appId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setTimestamp(DateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public void setType(ActionType type) {
+		this.type = type;
+	}
+
+	@Override
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public ActionType getType() {
+		return type;
+	}
+
+	@Override
+	public String getAppId() {
+		return appId;
 	}
 
 	@Override
@@ -44,25 +59,14 @@ public abstract class AbstractAction implements IActivity {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
 	@Override
 	public String getUserId() {
 		return userId;
 	}
-	
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
+
 	@Override
 	public DateTime getTimestamp() {
 		return timestamp;
 	}
-	
-	public void setTimestamp(DateTime ts) {
-		this.timestamp = ts;
-	}
+
 }

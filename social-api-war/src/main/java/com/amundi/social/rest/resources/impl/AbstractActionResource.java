@@ -1,4 +1,4 @@
-package com.amundi.social.rest.resources;
+package com.amundi.social.rest.resources.impl;
 
 import javax.security.auth.login.LoginException;
 import javax.ws.rs.core.HttpHeaders;

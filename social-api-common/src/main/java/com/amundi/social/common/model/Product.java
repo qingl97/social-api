@@ -2,6 +2,7 @@ package com.amundi.social.common.model;
 
 import java.math.BigDecimal;
 
+import com.amundi.social.common.model.IActivity.ActionType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -92,6 +93,23 @@ public class Product implements IProduct {
 	@Override
 	public int getNbComments() {
 		return nbComments;
+	}
+
+	@Override
+	public IProductCount transferToCount(ActionType type) {
+		ProductActivityCount prdCount = new ProductActivityCount();
+		prdCount.setAppId(appId);
+		prdCount.setProductId(productId);
+		prdCount.setType(type);
+		if(type == ActionType.COMMENT)
+			prdCount.setCount(nbComments);
+		if(type == ActionType.LIKE)
+			prdCount.setCount(nbLikes);
+		if(type == ActionType.FAVORITE)
+			prdCount.setCount(nbFavorites);
+		if(type == ActionType.FOLLOW)
+			prdCount.setCount(nbFollows);
+		return prdCount;
 	}
 
 }

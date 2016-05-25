@@ -12,7 +12,7 @@ import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
 import com.amundi.social.repo.dao.impl.FollowDaoImpl;
 import com.amundi.social.repo.dao.impl.LikeDaoImpl;
 
-public abstract class AbstractService {
+public abstract class AbstractActivityService {
 	
 	private ILikeDao likeDao = new LikeDaoImpl();
 	private IFollowDao followDao = new FollowDaoImpl();

@@ -1,5 +1,7 @@
 package com.amundi.social.rest.application;
 
+
+
 import javax.ws.rs.ApplicationPath;
 
 import com.amundi.services.server.AmundiApplication;
@@ -8,6 +10,8 @@ import com.amundi.social.rest.resources.CommentResource;
 import com.amundi.social.rest.resources.FavoriteResource;
 import com.amundi.social.rest.resources.FollowResource;
 import com.amundi.social.rest.resources.LikeResource;
+import com.amundi.social.rest.resources.impl.ProductViewResourceImpl;
+import com.amundi.social.rest.resources.impl.UserActivityResourceImpl;
 
 import net.active.services.server.util.filter.CorsFilter;
 
@@ -24,6 +28,9 @@ public class ApiServer extends AmundiApplication {
 		registerResources(FollowResource.class);
 		registerResources(FavoriteResource.class);
 		registerResources(CommentResource.class);
+		registerResources(UserActivityResourceImpl.class);
+		registerResources(ProductViewResourceImpl.class);
+//		registerResources(ProductResource.class);
 	}
 	
 	@Override

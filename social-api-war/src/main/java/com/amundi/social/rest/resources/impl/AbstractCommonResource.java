@@ -1,4 +1,4 @@
-package com.amundi.social.rest.resources;
+package com.amundi.social.rest.resources.impl;
 
 import java.util.List;
 
@@ -10,9 +10,10 @@ import org.apache.log4j.Logger;
 import com.amundi.social.common.model.IActivity;
 import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.providers.IProductProvider;
-import com.amundi.social.common.providers.IUserActivityProvider;
+import com.amundi.social.common.providers.IActivityProvider;
 import com.amundi.social.core.providers.impl.ProductService;
-import com.amundi.social.core.providers.impl.UserActivityService;
+import com.amundi.social.core.providers.impl.ActivityService;
+import com.amundi.social.rest.resources.ICommonResource;
 import com.amundi.social.rest.resources.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -23,7 +24,7 @@ public abstract class AbstractCommonResource extends AbstractResource implements
 	private static final Logger LOGGER = Logger.getLogger(AbstractCommonResource.class);
 	
 	private ActionType type;
-	private IUserActivityProvider userActivityService = new UserActivityService();
+	private IActivityProvider activityService = new ActivityService();
 	private IProductProvider productService = new ProductService();
 	
 	public AbstractCommonResource(ActionType type) {
@@ -33,36 +34,36 @@ public abstract class AbstractCommonResource extends AbstractResource implements
 	@Override
 	public Response getAll(boolean detail) {
 		List<? extends Object> ret;
-		ret = detail ? userActivityService.get(type) : productService.getAll();
+		ret = detail ? activityService.getAll(type) : productService.getAll();
 		return buildDefaultJsonFormatResponse(ret);
 	}
 
 	@Override
 	public Response getUserActivities(String userId) {
-		return buildDefaultJsonFormatResponse(userActivityService.get(userId, type));
+		return buildDefaultJsonFormatResponse(activityService.getByUser(userId, type));
 	}
 
 	@Override
 	public Response getUserActivities(String userId, String appId) {
-		return buildDefaultJsonFormatResponse(userActivityService.get(userId, appId, type));
+		return buildDefaultJsonFormatResponse(activityService.getByUser(userId, appId, type));
 	}
 
 	@Override
 	public Response getUserActivity(String userId, String appId, String productId) {
-		IActivity activity = userActivityService.get(userId, appId, productId, type);
+		IActivity activity = activityService.getByUser(userId, appId, productId, type);
 		return activity != null ?  buildDefaultJsonFormatResponse(activity) : Response.ok().build();
 	}
 
 	@Override
 	public Response doAction(String userId, String appId, String productId) {
-		userActivityService.add(userId, appId, productId, type);
+		activityService.add(userId, appId, productId, type);
 		LOGGER.info("user " + userId + " does " + type.toString() + " on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
 
 	@Override
 	public Response undoAction(String userId, String appId, String productId) {
-		userActivityService.remove(userId, appId, productId, type);
+		activityService.remove(userId, appId, productId, type);
 		LOGGER.info("user " + userId + " undo " + type.toString() + " on product " + productId + " of application " + appId);
 		return Response.ok().build();
 	}
@@ -70,14 +71,14 @@ public abstract class AbstractCommonResource extends AbstractResource implements
 	@Override
 	public Response getByApplication(String appId, boolean detail) {
 		List<? extends Object> activities = 
-				detail == true ? productService.getWithDetails(appId, type) : productService.get(appId);
+				detail == true ? activityService.get(appId, type) : productService.get(appId);
 		return buildDefaultJsonFormatResponse(activities);
 	}
 
 	@Override
 	public Response getByProduct(String appId, String productId, boolean detail) {
 		if(detail) {
-			return buildDefaultJsonFormatResponse(productService.getWithDetails(appId, productId, type));
+			return buildDefaultJsonFormatResponse(activityService.get(appId, productId, type));
 		} else {
 			return buildDefaultJsonFormatResponse(productService.get(appId, productId));
 		}

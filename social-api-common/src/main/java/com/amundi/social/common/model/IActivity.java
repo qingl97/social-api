@@ -13,9 +13,27 @@ public interface IActivity {
 		public int val;
 		
 		ActionType(int val) {this.val = val;}
+		
+		public static ActionType fromString(String val) {
+			if(val != null) {
+				for(ActionType type : ActionType.values())
+					if(val.equalsIgnoreCase(type.name()))
+						return type;
+			}
+			return null;
+		}
+		
+		public static ActionType fromInt(int val) {
+			for(ActionType type : ActionType.values())
+				if(val == type.val)
+					return type;
+			return null;
+		}
 	}
 
 	@JsonIgnore
+	int getId();
+//	@JsonIgnore
 	ActionType getType();
 	String getAppId();
 	String getProductId();
