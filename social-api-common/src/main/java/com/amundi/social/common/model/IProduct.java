@@ -11,5 +11,6 @@ public interface IProduct {
 	int getNbFavorites();
 	int getNbFollows();
 	int getNbComments();
+	double getScore();
 	IProductCount transferToCount(ActionType type);
 }

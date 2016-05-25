@@ -21,6 +21,7 @@ public class Product implements IProduct {
 	private int nbFavorites;
 	private int nbFollows;
 	private int nbComments;
+	private double score;
 
 	public Product(String appId, String productId) {
 		this.appId = appId;
@@ -28,20 +29,31 @@ public class Product implements IProduct {
 		this.id = IdentityBuilder.build(appId, productId);
 	}
 	
-	public Product(String appId, String productId, int nbLikes, int nbFavorites, int nbFollows, int nbComments) {
+	public Product(String appId, String productId, int nbLikes, int nbFavorites, int nbFollows, int nbComments, double score) {
 		this(appId, productId);
 		this.nbLikes = nbLikes;
 		this.nbFavorites = nbFavorites;
 		this.nbFollows = nbFollows;
 		this.nbComments = nbComments;
+		this.score = score;
 	}
 	
-	public Product(String appId, String productId, BigDecimal nbLikes, BigDecimal nbFavorites, BigDecimal nbFollows, BigDecimal nbComments) {
+	public Product(String appId, String productId, BigDecimal nbLikes, BigDecimal nbFavorites, BigDecimal nbFollows, BigDecimal nbComments, double score) {
 		this(appId, productId);
 		this.nbLikes = nbLikes.intValue();
 		this.nbFavorites = nbFavorites.intValue();
 		this.nbFollows = nbFollows.intValue();
 		this.nbComments = nbComments.intValue();
+		this.score = score;
+	}
+	
+	@Override
+	public double getScore() {
+		return this.score;
+	}
+	
+	public void setScore(double score) {
+		this.score = score;
 	}
 
 	@Override
