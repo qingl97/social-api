@@ -44,6 +44,24 @@
 		<module>social-api-common</module>
 		<module>social-api-repo</module>
 	</modules>
+	
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Amundi Releases</name>
+			<url>https://dtp.intramundi.com/nexus/content/repositories/amundi-releases</url>
+		</repository>
+		
+		<snapshotRepository>
+			<id>nexus</id>
+            <name>Amundi Snapshots</name>
+            <url>https://dtp.intramundi.com/nexus/content/repositories/amundi-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<scm>
+		<connection>scm:git:https://git.intramundi.com/digicode/social-api</connection>
+	</scm>
 
 	<dependencyManagement>
 		<dependencies>
