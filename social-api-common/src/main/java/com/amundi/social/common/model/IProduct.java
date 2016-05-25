@@ -1,7 +1,5 @@
 package com.amundi.social.common.model;
 
-import com.amundi.social.common.model.IActivity.ActionType;
-
 public interface IProduct {
 
 	String getAppId();
@@ -12,5 +10,5 @@ public interface IProduct {
 	int getNbFollows();
 	int getNbComments();
 	double getScore();
-	IProductCount transferToCount(ActionType type);
+//	IProductCount transferToCount(ActionType type);
 }
