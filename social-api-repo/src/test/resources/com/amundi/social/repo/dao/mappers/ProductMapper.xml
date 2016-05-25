@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amundi.social.repo.dao.mappers.ProductMapper">
+	<resultMap type="com.amundi.social.common.model.Product" id="result">
+		<result property = "appId" column = "app_id" />
+		<result property = "productId" column = "product_id" />
+		<result property = "nbLikes" column = "nbLikes" javaType="int" />
+		<result property = "nbFavorites" column = "nbFavorites" javaType="int" />
+		<result property = "nbFollows" column = "nbFollows" javaType="int" />
+		<result property = "nbComments" column = "nbComments" javaType="int" />
+	</resultMap>
+	
+	<sql id="columns">
+		select app_id, product_id, sum(if(type = 1, 1, 0)) as nbLikes, sum(if(type = 2, 1, 0)) as nbFavorites, sum(if(type = 3, 1, 0)) as nbFollows, sum(if(type = 4, 1, 0)) as nbComments 
+	</sql>
+	
+	<select id="getAll" resultMap="result">
+		<include refid="columns"/>
+		from activities
+		group by app_id, product_id;
+	</select>
+	
+	<select id="getByProduct" parameterType="string" resultMap="result">
+		<include refid="columns"/>
+		from activities
+		where app_id = #{appId} and product_id = #{productId}; 
+	</select>
+	
+	<select id="getByApplication" parameterType="string" resultMap="result">
+		<include refid="columns"/>
+		from (select * from activities where app_id = #{appId}) as alias
+		group by product_id;
+	</select>
+</mapper>
