@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
+import com.amundi.social.repo.exceptions.SqlSessionFactoryInitFailedException;
+
 public class SqlSessionProvider {
 	
 	private static final Logger LOGGER = Logger.getLogger(SqlSessionProvider.class);
@@ -22,10 +24,11 @@ public class SqlSessionProvider {
 				synchronized(SqlSessionProvider.class) {
 					InputStream inputStream = Resources.getResourceAsStream(MYBATIS_CONFIG);
 					sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+					inputStream.close();
 				}
 		} catch (IOException e) {
 			LOGGER.error("failed reading mybatis configuration mybatis-config.xml");
-			throw new RuntimeException(e);
+			throw new SqlSessionFactoryInitFailedException(e);
 		}
 	}
 
