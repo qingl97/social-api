@@ -28,7 +28,7 @@ public class ActivityService extends AbstractActivityService implements IActivit
 		}
 		try {
 			for(Method m : dao.getClass().getDeclaredMethods()) {
-				if(m.getName().equals("add")) {
+				if("add".equals(m.getName())) {
 					m.invoke(dao, activity);
 					return;
 				}
