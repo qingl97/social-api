@@ -1,7 +1,5 @@
 package com.amundi.social.rest.resources.impl;
 
-import java.util.List;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -10,9 +8,7 @@ import org.apache.log4j.Logger;
 import com.amundi.social.common.model.IActivity;
 import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.providers.IActivityProvider;
-import com.amundi.social.common.providers.IProductProvider;
 import com.amundi.social.core.providers.impl.ActivityService;
-import com.amundi.social.core.providers.impl.ProductService;
 import com.amundi.social.rest.resources.ICommonRetrievingResource;
 import com.amundi.social.rest.resources.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -25,17 +21,14 @@ public abstract class AbstractCommonRetrievingResource extends AbstractResource 
 	
 	private ActionType type;
 	protected IActivityProvider activityService = new ActivityService();
-	protected IProductProvider productService = new ProductService();
 	
 	public AbstractCommonRetrievingResource(ActionType type) {
 		this.type = type;
 	}
 
 	@Override
-	public Response getAll(boolean detail) {
-		List<? extends Object> ret;
-		ret = detail ? activityService.getAll(type) : productService.getAll();
-		return buildDefaultJsonFormatResponse(ret);
+	public Response getAll() {
+		return buildDefaultJsonFormatResponse(activityService.getAll(type));
 	}
 
 	@Override
@@ -55,19 +48,13 @@ public abstract class AbstractCommonRetrievingResource extends AbstractResource 
 	}
 
 	@Override
-	public Response getByApplication(String appId, boolean detail) {
-		List<? extends Object> activities = 
-				detail? activityService.get(appId, type) : productService.get(appId);
-		return buildDefaultJsonFormatResponse(activities);
+	public Response getByApplication(String appId) {
+		return buildDefaultJsonFormatResponse(activityService.get(appId, type));
 	}
 
 	@Override
-	public Response getByProduct(String appId, String productId, boolean detail) {
-		if(detail) {
-			return buildDefaultJsonFormatResponse(activityService.get(appId, productId, type));
-		} else {
-			return buildDefaultJsonFormatResponse(productService.get(appId, productId));
-		}
+	public Response getByProduct(String appId, String productId) {
+		return buildDefaultJsonFormatResponse(activityService.get(appId, productId, type));
 	}
 	
 	protected Response buildDefaultJsonFormatResponse(Object value) {
