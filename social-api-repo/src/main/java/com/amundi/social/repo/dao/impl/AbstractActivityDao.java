@@ -1,11 +1,10 @@
 package com.amundi.social.repo.dao.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.amundi.social.common.model.IActivity;
 import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IGenericActivityDao;
 import com.amundi.social.repo.dao.mappers.GenericActivityMapper;
@@ -62,18 +61,9 @@ public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
 	}
 
 	@Override
-	public int add(String appId, String productId, String userId) {
+	public void delete(IActivity activity) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
-			int activityId = session.getMapper(mapper).add(userId, appId, productId);
-			session.commit();
-			return activityId;
-		}
-	}
-
-	@Override
-	public void delete(String appId, String productId, String userId) {
-		try(SqlSession session = SqlSessionProvider.openSession()) {
-			session.getMapper(mapper).delete(userId, appId, productId);
+			session.getMapper(mapper).delete(activity);
 			session.commit();
 		}
 	}
@@ -85,16 +75,4 @@ public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
 			session.commit();
 		}
 	}
-
-	@Override
-	public Map<String, List<T>> getByUsers(List<String> userIds) {
-		try(SqlSession session = SqlSessionProvider.openSession()) {
-			Map<String, List<T>> rst = new HashMap<>();
-			for(String userId : userIds) {
-				rst.put(userId, session.getMapper(mapper).fetchByUser(userId));
-			}
-			return rst;
-		} 
-	}
-
 }

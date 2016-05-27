@@ -8,17 +8,6 @@ public class Application {
 	private String creatorId;
 	private String description;
 	private DateTime timeCreated;
-	
-	public Application() {
-		
-	}
-	
-	public Application(String id, String creatorId, String desc, DateTime timeCreated) {
-		this.id = id;
-		this.creatorId = creatorId;
-		this.description = desc;
-		this.timeCreated = timeCreated;
-	}
 
 	public String getId() {
 		return id;

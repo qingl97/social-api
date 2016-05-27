@@ -4,4 +4,6 @@ import com.amundi.social.common.model.Comment;
 
 public interface CommentMapper extends GenericActivityMapper<Comment> {
 
+	void addActivity(Comment fav);
+	void addNoteContent(Comment fav);
 }

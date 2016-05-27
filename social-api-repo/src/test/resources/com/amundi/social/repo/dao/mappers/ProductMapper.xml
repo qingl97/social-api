@@ -10,27 +10,36 @@
 		<result property = "nbFavorites" column = "nbFavorites" javaType="int" />
 		<result property = "nbFollows" column = "nbFollows" javaType="int" />
 		<result property = "nbComments" column = "nbComments" javaType="int" />
+		<result property = "score" column = "score" javaType="double"/>
 	</resultMap>
 	
 	<sql id="columns">
-		select app_id, product_id, sum(if(type = 1, 1, 0)) as nbLikes, sum(if(type = 2, 1, 0)) as nbFavorites, sum(if(type = 3, 1, 0)) as nbFollows, sum(if(type = 4, 1, 0)) as nbComments 
+		select 
+			app_id, 
+			product_id, 
+			sum(if(type = 1, 1, 0)) as nbLikes, 
+			sum(if(type = 2, 1, 0)) as nbFavorites, 
+			sum(if(type = 3, 1, 0)) as nbFollows, 
+			sum(if(type = 4, 1, 0)) as nbComments, 
+			avg(comments.note) as score
 	</sql>
 	
 	<select id="getAll" resultMap="result">
 		<include refid="columns"/>
-		from activities
+		from activities left join comments on activities.id = comments.activity_id
 		group by app_id, product_id;
 	</select>
 	
 	<select id="getByProduct" parameterType="string" resultMap="result">
 		<include refid="columns"/>
-		from activities
+		from activities left join comments on activities.id = comments.activity_id
 		where app_id = #{appId} and product_id = #{productId}; 
 	</select>
 	
 	<select id="getByApplication" parameterType="string" resultMap="result">
 		<include refid="columns"/>
-		from (select * from activities where app_id = #{appId}) as alias
+		from (select * from activities where app_id = #{appId}) as alias 
+			left join comments on alias.id = comments.activity_id
 		group by product_id;
 	</select>
 </mapper>

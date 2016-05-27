@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.amundi.social.common.model.IActivity;
+
 public interface GenericActivityMapper<T> {
 	
 	List<T> fetchAll();
@@ -15,7 +17,6 @@ public interface GenericActivityMapper<T> {
 	List<T> fetchByUserApplication(@Param("userId") String userId, @Param("appId") String appId);
 	T fetchByUserProduct(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
 	
-	int add(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
-	void delete(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
+	void delete(IActivity activity);
 	void clear(@Param("appId") String appId);
 }

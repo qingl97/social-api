@@ -10,17 +10,6 @@ public abstract class AbstractAction implements IActivity {
 	private String userId;
 	private DateTime timestamp;
 	
-	public AbstractAction() {
-		
-	}
-	
-	public AbstractAction(String appId, String productId, String userId) {
-		this.appId = appId;
-		this.productId = productId;
-		this.userId = userId;
-		this.timestamp = DateTime.now();
-	}
-	
 	@Override
 	public int getId() {
 		return this.id;

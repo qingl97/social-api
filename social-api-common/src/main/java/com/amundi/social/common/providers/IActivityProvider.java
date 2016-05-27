@@ -8,14 +8,10 @@ import com.amundi.social.common.model.IActivity.ActionType;
 public interface IActivityProvider {
 	
 	/**
-	 * Add an activity.
 	 * 
-	 * @param userId
-	 * @param appId
-	 * @param productId
-	 * @param type
+	 * @param activity
 	 */
-	void add(String userId, String appId, String productId, ActionType type);
+	void add(IActivity activity);
 	
 	/**
 	 * Remove an activity.
@@ -25,7 +21,7 @@ public interface IActivityProvider {
 	 * @param productId
 	 * @param type
 	 */
-	void remove(String userId, String appId, String productId, ActionType type);
+	void remove(IActivity activity);
 	
 	/**
 	 * Get all activities. 

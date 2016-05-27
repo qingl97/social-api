@@ -20,6 +20,26 @@
 				<property name="password" value="${dev.db.password}" />
 			</dataSource>
 		</environment>
+		
+		<environment id="rct">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${rct.db.driver}" />
+				<property name="url" value="${rct.db.url}" />
+				<property name="username" value="${rct.db.username}" />
+				<property name="password" value="${rct.db.password}" />
+			</dataSource>
+		</environment>
+		
+		<environment id="prd">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${prd.db.driver}" />
+				<property name="url" value="${prd.db.url}" />
+				<property name="username" value="${prd.db.username}" />
+				<property name="password" value="${prd.db.password}" />
+			</dataSource>
+		</environment>
 	</environments>
 	
 	<mappers>

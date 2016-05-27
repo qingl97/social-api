@@ -4,4 +4,5 @@ import com.amundi.social.common.model.Follow;
 
 public interface IFollowDao extends IGenericActivityDao<Follow> {
 
+	void add(Follow follow);
 }

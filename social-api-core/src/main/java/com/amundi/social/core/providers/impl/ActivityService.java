@@ -1,5 +1,7 @@
 package com.amundi.social.core.providers.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,28 +15,38 @@ import com.amundi.social.repo.dao.IGenericActivityDao;
 public class ActivityService extends AbstractActivityService implements IActivityProvider {
 	
 	private static final Logger LOGGER = Logger.getLogger(ActivityService.class);
-
+	
 	@Override
-	public void add(String userId, String appId, String productId, ActionType type) {
-		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
-		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
-		for(IActivity activity : activities) {
-			if(activity.getProductId().equalsIgnoreCase(productId)) {
-				LOGGER.debug("user already did " + type.toString() + ", operation ignored");
+	public void add(IActivity activity) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(activity.getType());
+		List<? extends IActivity> activities = dao.getByUserApplication(activity.getUserId(), activity.getAppId());
+		for(IActivity ac : activities) {
+			if(ac.getProductId().equalsIgnoreCase(activity.getProductId())) {
+				LOGGER.debug("user already did " + activity.getType().toString() + ", operation ignored");
 				return;
 			}
 		}
-		dao.add(appId, productId, userId);
+		try {
+			for(Method m : dao.getClass().getDeclaredMethods()) {
+				if(m.getName().equals("add")) {
+					m.invoke(dao, activity);
+					return;
+				}
+			}
+			throw new NoSuchMethodException();
+		} catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
-	
+
 	@Override
-	public void remove(String userId, String appId, String productId, ActionType type) {
-		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
-		List<? extends IActivity> activities = dao.getByUserApplication(userId, appId);
-		for(IActivity activity : activities) {
-			if(activity.getProductId().equalsIgnoreCase(productId)) {
-				dao.delete(appId, productId, userId);
-				LOGGER.debug("undo " + type.toString() + " on product " + productId + " of app " + appId);
+	public void remove(IActivity activity) {
+		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(activity.getType());
+		List<? extends IActivity> activities = dao.getByUserApplication(activity.getUserId(), activity.getAppId());
+		for(IActivity ac : activities) {
+			if(ac.getProductId().equalsIgnoreCase(activity.getProductId())) {
+				dao.delete(ac);
+				LOGGER.debug("undo " + activity.getType().toString() + " on product " + activity.getProductId() + " of app " + activity.getAppId());
 				return;
 			}
 		}

@@ -7,11 +7,16 @@
 		<result property = "appId" column = "app_id" />
 		<result property = "productId" column = "product_id" />
 		<result property = "userId" column = "user_id" />
+		<result property = "note" column = "note" javaType="int"/>
+		<result property = "content" column = "content" javaType="string"/>
 		<result property = "timestamp" column = "timestamp" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
 	</resultMap>
 	
 	<sql id="all">
-		select * from activities where type = 4
+		select 
+			ac.id, ac.app_id, ac.product_id, ac.timestamp, ac.user_id, co.note, co.content 
+		from activities as ac left join comments as co on ac.id = co.activity_id 
+		where type = 4
 	</sql>
 
 	<!-- Selects -->
@@ -40,12 +45,12 @@
 	</select>
 	
 	<!-- Insert -->
-	<insert id="add" parameterType="string" useGeneratedKeys="true" keyProperty="id">
+	<insert id="addActivity" parameterType="com.amundi.social.common.model.Comment" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		insert into activities (type, app_id, product_id, user_id) values (4, #{appId}, #{productId}, #{userId});
-		
-		<selectKey keyProperty="id" resultType="int" order="AFTER">
-			select last_insert_id() as id
-		</selectKey>
+	</insert>
+	
+	<insert id="addNoteContent" parameterType="com.amundi.social.common.model.Comment">
+		insert into comments (activity_id, content, note) values (#{id}, #{content}, #{note});
 	</insert>
 	
 	<!-- Delete -->

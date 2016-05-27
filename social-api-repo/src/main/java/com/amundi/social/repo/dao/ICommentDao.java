@@ -4,4 +4,5 @@ import com.amundi.social.common.model.Comment;
 
 public interface ICommentDao extends IGenericActivityDao<Comment> {
 
+	void add(Comment cmt);
 }

@@ -36,12 +36,8 @@
 	</select>
 	
 	<!-- Insert -->
-	<insert id="add" parameterType="string" useGeneratedKeys="true" keyProperty="id">
+	<insert id="add" parameterType="com.amundi.social.common.model.Like" useGeneratedKeys="true" keyProperty="id">
 		insert into activities (type, app_id, product_id, user_id) values (1, #{appId}, #{productId}, #{userId});
-		
-		<selectKey keyProperty="id" resultType="int" order="AFTER">
-			select last_insert_id() as id
-		</selectKey>
 	</insert>
 	
 	<!-- Delete -->

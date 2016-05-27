@@ -1,7 +1,6 @@
 package com.amundi.social.repo.dao.impl;
 
 import org.apache.ibatis.session.SqlSession;
-import org.joda.time.DateTime;
 
 import com.amundi.social.common.model.Application;
 import com.amundi.social.repo.SqlSessionProvider;
@@ -27,9 +26,9 @@ public class ApplicationDaoImpl implements IApplicationDao {
 	}
 
 	@Override
-	public void add(String appId, String userId, String desc, DateTime time) {
+	public void add(String appId, String userId, String desc) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
-			session.getMapper(ApplicationMapper.class).add(appId, userId, desc, time);
+			session.getMapper(ApplicationMapper.class).add(appId, userId, desc);
 			session.commit();
 		}
 	}

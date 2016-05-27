@@ -1,7 +1,5 @@
 package com.amundi.social.core.providers.impl;
 
-import org.joda.time.DateTime;
-
 import com.amundi.social.common.model.Application;
 import com.amundi.social.common.providers.IApplicationProvider;
 import com.amundi.social.repo.dao.IApplicationDao;
@@ -23,7 +21,7 @@ public class ApplicationService implements IApplicationProvider {
 
 	@Override
 	public void newApp(String appId, String userId, String desc) {
-		dao.add(appId, userId, desc, DateTime.now());
+		dao.add(appId, userId, desc);
 	}
 
 	@Override

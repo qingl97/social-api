@@ -15,8 +15,8 @@
 		select * from applications where id = #{appId};
 	</select>
 	<!-- Insert -->
-	<insert id="add" parameterType="string" keyProperty="id">
-		insert into applications (id, user_id, description, creation_date) values (#{appId}, #{userId}, #{desc}, #{time})
+	<insert id="add" parameterType="com.amundi.social.common.model.Application" keyProperty="id">
+		insert into applications (id, user_id, description) values (#{appId}, #{userId}, #{desc})
 	</insert>
 	
 	<!-- Delete -->
