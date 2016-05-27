@@ -5,6 +5,7 @@ public class SqlSessionFactoryInitFailedException extends RuntimeException {
 	private static final long serialVersionUID = 7577863160168346257L;
 
 	public SqlSessionFactoryInitFailedException() {
+		super();
 	}
 
 	public SqlSessionFactoryInitFailedException(String message) {

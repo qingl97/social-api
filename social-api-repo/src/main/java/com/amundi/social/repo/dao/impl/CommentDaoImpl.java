@@ -35,6 +35,8 @@ public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICom
 			// Here we make the insertion of comment to happen in two transations and the new activity 
 			// will be deleted once there is an exception thrown. 
 			LOGGER.error(e.getMessage(), e);
+			if(session == null)
+				session = SqlSessionProvider.openSession();
 			session.getMapper(CommentMapper.class).delete(cmt);
 		} finally {
 			session.close();
