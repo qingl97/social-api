@@ -26,7 +26,15 @@ public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICom
 			session.getMapper(CommentMapper.class).addNoteContent(cmt);
 			session.commit();
 		} catch(Exception e) {
-			LOGGER.error(e.getLocalizedMessage(), e);
+			// To insert a comment in database, first insert a record in table 'activities'; then 
+			// insert a record in table 'comments'. Since the id for the newly inserted activity 
+			// for this comment is not yet generated until the transation commits, the second insert
+			// will fail due to the foreign key constraint (on delete cascade, on update cascade) 
+			// that 'comments' have a foreign key 'activity_id' which references the column 'id' 
+			// in 'activities'.
+			// Here we make the insertion of comment to happen in two transations and the new activity 
+			// will be deleted once there is an exception thrown. 
+			LOGGER.error(e.getMessage(), e);
 			session.getMapper(CommentMapper.class).delete(cmt);
 		} finally {
 			session.close();

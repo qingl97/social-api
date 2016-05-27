@@ -2,16 +2,12 @@ package com.amundi.social.rest.resources.impl;
 
 import javax.security.auth.login.LoginException;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.amundi.services.server.security.authenticator.session.DeprecatedHttpSessionAuthenticator;
 import com.amundi.social.rest.application.SocialAPISecurityConfig;
-import com.amundi.social.rest.resources.util.JsonUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import net.active.services.common.RequestContextResolver;
 import net.active.services.server.RequestContextResolverImpl;
@@ -47,7 +43,7 @@ public abstract class AbstractActionResource extends AbstractResource {
 								SocialAPISecurityConfig.REALM, 
 								requestContextResolverImpl.getContainerRequestContext());
 			} catch (LoginException e) {
-				LOGGER.info(e.getMessage());
+				LOGGER.error(e.getMessage(), e);
 				return false;
 			}
 		}
@@ -57,14 +53,5 @@ public abstract class AbstractActionResource extends AbstractResource {
 	protected String getUserId() {
 		LOGGER.info(SecurityManager.getSubject().getPrimaryPrincipal().getName());
 		return SecurityManager.getSubject().getPrimaryPrincipal().getName();
-	}
-	
-	protected Response buildDefaultJsonFormatResponse(Object value) {
-		try {
-			return buildDefaultResponse(JsonUtil.serialize(value));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Failed to serialize object to JSON format").build();
-		}
 	}
 }

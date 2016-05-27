@@ -57,7 +57,7 @@ public abstract class AbstractCommonRetrievingResource extends AbstractResource 
 	@Override
 	public Response getByApplication(String appId, boolean detail) {
 		List<? extends Object> activities = 
-				detail == true ? activityService.get(appId, type) : productService.get(appId);
+				detail? activityService.get(appId, type) : productService.get(appId);
 		return buildDefaultJsonFormatResponse(activities);
 	}
 

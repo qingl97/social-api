@@ -17,6 +17,6 @@ public interface GenericActivityMapper<T> {
 	List<T> fetchByUserApplication(@Param("userId") String userId, @Param("appId") String appId);
 	T fetchByUserProduct(@Param("userId") String userId, @Param("appId") String appId, @Param("productId") String productId);
 	
-	void delete(IActivity activity);
+	int delete(IActivity activity);
 	void clear(@Param("appId") String appId);
 }

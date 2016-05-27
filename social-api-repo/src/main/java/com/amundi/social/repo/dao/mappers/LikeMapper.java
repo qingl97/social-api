@@ -4,5 +4,5 @@ import com.amundi.social.common.model.Like;
 
 public interface LikeMapper extends GenericActivityMapper<Like> {
 
-	void add(Like like);
+	int add(Like like);
 }

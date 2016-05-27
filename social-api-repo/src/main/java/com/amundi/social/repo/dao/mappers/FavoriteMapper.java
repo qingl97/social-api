@@ -4,5 +4,5 @@ import com.amundi.social.common.model.Favorite;
 
 public interface FavoriteMapper extends GenericActivityMapper<Favorite> {
 
-	void add(Favorite fav);
+	int add(Favorite fav);
 }
