@@ -2,6 +2,8 @@ package com.amundi.social.common.model;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public interface IActivity {
 	
 	public enum ActionType {
@@ -28,8 +30,9 @@ public interface IActivity {
 		}
 	}
 
-//	@JsonIgnore
+	@JsonIgnore
 	int getId();
+	@JsonIgnore
 	ActionType getType();
 	String getAppId();
 	String getProductId();
