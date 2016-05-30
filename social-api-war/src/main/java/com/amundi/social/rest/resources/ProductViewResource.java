@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public interface ProductViewResource {
 
-	@Path("/all")
+	@Path("/")
 	@GET
 	public Response getAll();
 	
