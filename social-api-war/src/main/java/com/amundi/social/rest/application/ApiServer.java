@@ -27,9 +27,7 @@ public class ApiServer extends AmundiApplication {
 		registerResources(FollowResource.class);
 		registerResources(FavoriteResource.class);
 		registerResources(CommentResource.class);
-//		registerResources(UserActivityResourceImpl.class);
 		registerResources(ProductViewResourceImpl.class);
-//		registerResources(ProductResource.class);
 	}
 	
 	@Override
