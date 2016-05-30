@@ -1,6 +1,7 @@
 package com.amundi.social.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The entity that a social action is operated on.
@@ -12,12 +13,19 @@ public class Product implements IProduct {
 	
 	@JsonIgnore
 	private String id;
+	@JsonProperty("app_id")
 	private String appId;
+	@JsonProperty("product_id")
 	private String productId;
+	@JsonProperty("count_likes")
 	private int nbLikes;
+	@JsonProperty("count_favorites")
 	private int nbFavorites;
+	@JsonProperty("count_follows")
 	private int nbFollows;
+	@JsonProperty("count_comments")
 	private int nbComments;
+	@JsonProperty("note")
 	private double score;
 	
 	@Override

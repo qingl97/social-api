@@ -3,6 +3,7 @@ package com.amundi.social.common.model;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface IActivity {
 	
@@ -34,8 +35,12 @@ public interface IActivity {
 	int getId();
 	@JsonIgnore
 	ActionType getType();
+	@JsonProperty("app_id")
 	String getAppId();
+	@JsonProperty("product_id")
 	String getProductId();
+	@JsonProperty("user_id")
 	String getUserId();
+	@JsonProperty("ts")
 	DateTime getTimestamp();
 }
