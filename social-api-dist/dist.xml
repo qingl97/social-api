@@ -1,0 +1,147 @@
+<project name="delivery" basedir="."  xmlns:if="ant:if" xmlns:unless="ant:unless">
+    <!-- Command Line properties > User properties > Local properties -->
+
+    <macrodef name="init">
+        <sequential>
+            <condition property="windows.os">
+                <os family="windows" />
+            </condition>
+            <condition property="unix.os">
+                <os family="unix" />
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="checkMandatoryParam">
+        <attribute name="param" />
+        <sequential>
+            <fail message="Mandatory property &quot;@{param}&quot; is not set or has no value">
+                <condition>
+                    <or>
+                        <equals arg1="${@{param}}" arg2=""/>
+                        <not>
+                            <isset property="@{param}"/>
+                        </not>
+                    </or>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="checkOptionalParam">
+        <attribute name="param" />
+        <sequential>
+            <condition property="@{param}.isset">
+                <and>
+                    <isset property="@{param}"/>
+                    <not><equals arg1="${@{param}}" arg2=""/></not>
+                </and>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="checkEnvValue">
+        <attribute name="env" />
+        <sequential>
+            <fail message="Property &quot;env&quot; has not a valid value. Valid values are DEV, RCT, TEST, PREPROD, PRJ, PROD">
+                <condition>
+                    <and>
+                        <not><equals arg1="@{env}" arg2="DEV" /></not>
+                        <not><equals arg1="@{env}" arg2="RCT" /></not>
+                        <not><equals arg1="@{env}" arg2="RECETTE" /></not>
+                        <not><equals arg1="@{env}" arg2="TEST" /></not>
+                        <not><equals arg1="@{env}" arg2="PREPROD" /></not>
+                        <not><equals arg1="@{env}" arg2="PRJ" /></not>
+                        <not><equals arg1="@{env}" arg2="PROD" /></not>
+                    </and>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copyWarOnDepot">
+        <sequential>
+            <echo message="*** Copying files on depot_${env} ***" />
+            <!-- need jsch.jar at ant/lib location for instance -->
+            <scp
+                todir="${unix.depot.root}/depot_${env}/${server.depot.dir}/${server.deployment.dir}"
+                keyfile="${private.key.file}"
+                file="${target.dir}/${war.name}"
+                if:set="unix.os" />
+            <copy
+                file="${target.dir}/${war.name}"
+                overwrite="true"
+                todir="${windows.depot.root}/depot_${env}/${server.depot.dir}/${server.deployment.dir}"
+                verbose="true"
+                if:set="windows.os" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copyConfOnDepot">
+        <sequential>
+            <echo message="*** Copying files on depot_${env} ***" />
+            <!-- need jsch.jar at ant/lib location for instance -->
+            <scp
+                todir="${unix.depot.root}/depot_${env}/${server.depot.dir}/conf/"
+                keyfile="${private.key.file}"
+                if:set="unix.os">
+                <fileset dir="${basedir}/conf/" />
+            </scp>
+            <copy
+                overwrite="true"
+                todir="${windows.depot.root}/depot_${env}/${server.depot.dir}/conf/"
+                verbose="true"
+                if:set="windows.os" >
+                <fileset dir="${basedir}/conf/" />
+            </copy>
+ 
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copyBladelogicFileOnDepot">
+        <sequential>
+            <echo message="*** Copying bladelogic file on depot_${env} ***" />
+            <!-- need jsch.jar at ant/lib location for instance -->
+            <scp todir="${unix.depot.root}/depot_${env}/${appli.depot.root}" keyfile="${private.key.file}" if:set="unix.os">
+                <fileset file="${bladelogic.file}" />
+            </scp>
+            <copy overwrite="true" todir="${windows.depot.root}/depot_${env}/${appli.depot.root}" if:set="windows.os">
+                <fileset file="${bladelogic.file}" />
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="publish">
+        <sequential>
+            <createBladelogicFile />
+            <copyWarOnDepot />
+            <copyConfOnDepot />
+            <copyBladelogicFileOnDepot />
+        </sequential>
+    </macrodef>
+
+    <target name="publish">
+        <property file="${basedir}/dist.properties" />
+        <property name="bladelogic.file" value="${basedir}/brique-social.bladelogic" />
+        <property name="appli.depot.root" value="asuinfsy_delivery" />
+        <property name="server.depot.dir" value="${appli.depot.root}/forge/back" />
+        <property name="server.deployment.dir" value="wildfly/deployments" />
+        <property name="unix.depot.root" value="appli@refapprivoli:/apprefappli" />
+        <property name="windows.depot.root" value="//depot" />
+        <property name="target.dir" value="${basedir}/../social-api-war/target" />
+        <property name="war.name" value="social-api-war.war"/>
+        <property name="private.key.file" value="~/.ssh/id_rsa" />
+
+        <init />
+        <checkMandatoryParam param="env" />
+        <checkEnvValue env="${env}" />
+        <checkMandatoryParam param="appli" />
+        <checkMandatoryParam param="version" />
+        <checkMandatoryParam param="login" />
+        <checkMandatoryParam param="target.dir" />
+        <checkOptionalParam param="group" />
+        <checkOptionalParam param="purge" />
+        <checkOptionalParam param="LIVR" />
+        <publish />
+    </target>
+</project>

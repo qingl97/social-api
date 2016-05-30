@@ -43,6 +43,7 @@
 		<module>social-api-core</module>
 		<module>social-api-common</module>
 		<module>social-api-repo</module>
+		<module>social-api-dist</module>
 	</modules>
 	
 	<distributionManagement>
