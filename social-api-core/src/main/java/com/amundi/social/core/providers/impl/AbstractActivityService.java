@@ -2,6 +2,7 @@ package com.amundi.social.core.providers.impl;
 
 import com.amundi.social.common.model.IActivity;
 import com.amundi.social.common.model.IActivity.ActionType;
+import com.amundi.social.common.providers.IActivityProvider;
 import com.amundi.social.repo.dao.ICommentDao;
 import com.amundi.social.repo.dao.IFavoriteDao;
 import com.amundi.social.repo.dao.IFollowDao;
@@ -12,7 +13,7 @@ import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
 import com.amundi.social.repo.dao.impl.FollowDaoImpl;
 import com.amundi.social.repo.dao.impl.LikeDaoImpl;
 
-public abstract class AbstractActivityService {
+public abstract class AbstractActivityService implements IActivityProvider {
 	
 	private ILikeDao likeDao = new LikeDaoImpl();
 	private IFollowDao followDao = new FollowDaoImpl();

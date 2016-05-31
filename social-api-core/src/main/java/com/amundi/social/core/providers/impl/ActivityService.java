@@ -9,10 +9,9 @@ import org.apache.log4j.Logger;
 
 import com.amundi.social.common.model.IActivity;
 import com.amundi.social.common.model.IActivity.ActionType;
-import com.amundi.social.common.providers.IActivityProvider;
 import com.amundi.social.repo.dao.IGenericActivityDao;
 
-public class ActivityService extends AbstractActivityService implements IActivityProvider {
+public class ActivityService extends AbstractActivityService {
 	
 	private static final Logger LOGGER = Logger.getLogger(ActivityService.class);
 	

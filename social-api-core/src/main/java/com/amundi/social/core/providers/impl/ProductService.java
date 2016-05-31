@@ -7,7 +7,7 @@ import com.amundi.social.common.providers.IProductProvider;
 import com.amundi.social.repo.dao.IProductDao;
 import com.amundi.social.repo.dao.impl.ProductDaoImpl;
 
-public class ProductService extends AbstractActivityService implements IProductProvider {
+public class ProductService implements IProductProvider {
 	
 	private IProductDao productDao = new ProductDaoImpl();
 
