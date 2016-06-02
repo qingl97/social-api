@@ -7,7 +7,90 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>social-api-repo</artifactId>
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- Copy common resources that are shared in all environments -->
+						<phase>validate</phase>
+						<goals>
+							<goal>resources</goal>
+							<goal>testResources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>conf/</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Copy environment specific resources according to profile used -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<testResources>
+					<testResource>
+						<directory>src/main/resources/conf/dev</directory>
+					</testResource>
+				</testResources>
+				<resources>
+					<resource>
+						<directory>src/main/resources/conf/dev</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>rct</id>
+			<build>
+				<testResources>
+					<testResource>
+						<directory>src/main/resources/conf/rct</directory>
+					</testResource>
+				</testResources>
+				<resources>
+					<resource>
+						<directory>src/main/resources/conf/rct</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>prd</id>
+			<build>
+				<testResources>
+					<testResource>
+						<directory>src/main/resources/conf/prd</directory>
+					</testResource>
+				</testResources>
+				<resources>
+					<resource>
+						<directory>src/main/resources/conf/prd</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.amundi</groupId>
@@ -26,8 +109,8 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
-		  	<groupId>org.mariadb.jdbc</groupId>
-		  	<artifactId>mariadb-java-client</artifactId>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
 	</dependencies>
 </project>

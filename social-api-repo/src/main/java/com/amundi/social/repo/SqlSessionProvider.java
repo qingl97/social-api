@@ -14,7 +14,7 @@ import com.amundi.social.repo.exceptions.SqlSessionFactoryInitFailedException;
 public class SqlSessionProvider {
 	
 	private static final Logger LOGGER = Logger.getLogger(SqlSessionProvider.class);
-	private static final String MYBATIS_CONFIG = "mybatis/mybatis-config.xml";
+	private static final String MYBATIS_CONFIG = "mybatis-config.xml";
 	
 	private static SqlSessionFactory sqlSessionFactory;
 	

@@ -50,7 +50,7 @@
 	</insert>
 	
 	<insert id="addNoteContent" parameterType="com.amundi.social.common.model.Comment">
-		insert into comments (activity_id, content, note) values (#{activityId}, #{content}, #{note});
+		insert into comments (activity_id, content, note) values (#{id}, #{content}, #{note});
 	</insert>
 	
 	<!-- Delete -->
