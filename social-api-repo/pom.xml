@@ -20,12 +20,30 @@
 						<phase>validate</phase>
 						<goals>
 							<goal>resources</goal>
-							<goal>testResources</goal>
 						</goals>
 						<configuration>
 							<resources>
 								<resource>
 									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>conf/</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-test-resources</id>
+						<!-- Copy common test resources that are shared in all environments -->
+						<phase>validate</phase>
+						<goals>
+							<goal>testResources</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/test/resources</directory>
 									<filtering>true</filtering>
 									<excludes>
 										<exclude>conf/</exclude>
@@ -49,7 +67,7 @@
 			<build>
 				<testResources>
 					<testResource>
-						<directory>src/main/resources/conf/dev</directory>
+						<directory>src/test/resources/conf/dev</directory>
 					</testResource>
 				</testResources>
 				<resources>
@@ -64,7 +82,7 @@
 			<build>
 				<testResources>
 					<testResource>
-						<directory>src/main/resources/conf/rct</directory>
+						<directory>src/test/resources/conf/rct</directory>
 					</testResource>
 				</testResources>
 				<resources>
@@ -79,7 +97,7 @@
 			<build>
 				<testResources>
 					<testResource>
-						<directory>src/main/resources/conf/prd</directory>
+						<directory>src/test/resources/conf/prd</directory>
 					</testResource>
 				</testResources>
 				<resources>
