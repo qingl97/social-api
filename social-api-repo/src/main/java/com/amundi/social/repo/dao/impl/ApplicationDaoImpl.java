@@ -41,15 +41,4 @@ public class ApplicationDaoImpl implements IApplicationDao {
 		}
 	}
 
-	@Override
-	public void clearData(String appId) {
-		try(SqlSession session = SqlSessionProvider.openSession()) {
-			likeDao.clear(appId);
-			followDao.clear(appId);
-			favoriteDao.clear(appId);
-			commentDao.clear(appId);
-			session.commit();
-		}
-	}
-
 }

@@ -7,5 +7,4 @@ public interface IApplicationDao {
 	Application get(String appId);
 	void add(String appId, String userId, String desc);
 	void delete(String appId);
-	void clearData(String appId);
 }
