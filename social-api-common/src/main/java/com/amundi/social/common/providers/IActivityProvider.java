@@ -7,45 +7,13 @@ import com.amundi.social.common.model.IActivity.ActionType;
 
 public interface IActivityProvider {
 	
-	/**
-	 * 
-	 * @param activity
-	 */
 	void add(IActivity activity);
 	
-	/**
-	 * Remove an activity.
-	 * 
-	 * @param userId
-	 * @param appId
-	 * @param productId
-	 * @param type
-	 */
 	void remove(IActivity activity);
 	
-	/**
-	 * Get all activities. 
-	 * 
-	 * @return
-	 */
 	List<? extends IActivity> getAll();
-	
-	/**
-	 * Get all activities for that type.
-	 * 
-	 * @param type
-	 * @return
-	 */
 	List<? extends IActivity> getAll(ActionType type);
 	
-	/**
-	 * Get activities that are produced by a certain user on a product.
-	 * 
-	 * @param userId
-	 * @param appId
-	 * @param productId
-	 * @return
-	 */
 	List<? extends IActivity> getByUser(String userId, String appId, String productId);
 	IActivity getByUser(String userId, String appId, String productId, ActionType type);
 	

@@ -8,5 +8,4 @@ public interface IApplicationProvider {
 	Application getById(String appId);
 	void newApp(String appId, String userId, String desc);
 	void delete(String appId);
-	void delete(String appId, boolean reserveData);
 }

@@ -28,11 +28,4 @@ public class ApplicationService implements IApplicationProvider {
 	public void delete(String appId) {
 		dao.delete(appId);
 	}
-
-	@Override
-	public void delete(String appId, boolean reserveData) {
-		if(!reserveData)
-			dao.clearData(appId);
-		delete(appId);
-	}
 }
