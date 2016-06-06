@@ -13,10 +13,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.amundi.social.common.model.Comment;
 import com.amundi.social.common.model.IActivity.ActionType;
-import com.amundi.social.rest.resources.impl.AbstractCommonRetrievingResource;
+import com.amundi.social.core.providers.impl.ActivityService;
+import com.amundi.social.repo.dao.impl.CommentDaoImpl;
+import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
+import com.amundi.social.repo.dao.impl.FollowDaoImpl;
+import com.amundi.social.repo.dao.impl.LikeDaoImpl;
+import com.amundi.social.rest.resources.impl.AbstractCommonActivityResource;
 
 @Path("activity/comments")
-public class CommentResource extends AbstractCommonRetrievingResource {
+public class CommentResource extends AbstractCommonActivityResource {
 	
 	@XmlRootElement
 	public static class CommentBody {
@@ -26,6 +31,7 @@ public class CommentResource extends AbstractCommonRetrievingResource {
 
 	public CommentResource() {
 		super(ActionType.COMMENT);
+		activityService = new ActivityService(new LikeDaoImpl(), new FollowDaoImpl(), new FavoriteDaoImpl(), new CommentDaoImpl());
 	}
 
 	@PUT

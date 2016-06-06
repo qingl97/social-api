@@ -7,14 +7,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import com.amundi.social.common.model.IActivity.ActionType;
+import com.amundi.social.core.providers.impl.ActivityService;
+import com.amundi.social.repo.dao.impl.CommentDaoImpl;
+import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
+import com.amundi.social.repo.dao.impl.FollowDaoImpl;
+import com.amundi.social.repo.dao.impl.LikeDaoImpl;
 import com.amundi.social.common.model.Like;
-import com.amundi.social.rest.resources.impl.AbstractCommonRetrievingResource;
+import com.amundi.social.rest.resources.impl.AbstractCommonActivityResource;
 
 @Path("activity/likes")
-public class LikeResource extends AbstractCommonRetrievingResource {
+public class LikeResource extends AbstractCommonActivityResource {
 
 	public LikeResource() {
 		super(ActionType.LIKE);
+		activityService = new ActivityService(new LikeDaoImpl(), new FollowDaoImpl(), new FavoriteDaoImpl(), new CommentDaoImpl());
 	}
 
 	@PUT
