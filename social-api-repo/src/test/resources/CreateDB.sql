@@ -13,8 +13,6 @@ CREATE TABLE IF NOT EXISTS `applications` (
   UNIQUE KEY `ID_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Export de données de la table social_api.applications : ~3 rows (environ)
-DELETE FROM `applications`;
 /*!40000 ALTER TABLE `applications` DISABLE KEYS */;
 INSERT INTO `applications` (`id`, `user_id`, `description`, `creation_date`) VALUES
 	('APP-1', 'qing.liang-ext@amundi.com', 'A sample application for test', '2016-05-23 00:00:00'),
@@ -34,8 +32,6 @@ CREATE TABLE IF NOT EXISTS `activities` (
   FOREIGN KEY (`app_id`) REFERENCES `applications` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
--- Export de données de la table social_api.activities : ~32 rows (environ)
-DELETE FROM `activities`;
 /*!40000 ALTER TABLE `activities` DISABLE KEYS */;
 INSERT INTO `activities` (`id`, `type`, `app_id`, `product_id`, `user_id`, `timestamp`) VALUES
 	(2, 1, 'APP-1', 'DGC-002', 'qing.liang-ext@amundi.com', '2016-05-17 15:22:00'),
@@ -82,8 +78,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   FOREIGN KEY (`activity_id`) REFERENCES `activities` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Export de données de la table social_api.comments : ~3 rows (environ)
-DELETE FROM `comments`;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 INSERT INTO `comments` (`id`, `activity_id`, `content`, `note`) VALUES
 	(13, 50, 'a test content', 2),
