@@ -9,20 +9,24 @@ import com.amundi.social.common.model.IActivity;
 import com.amundi.social.common.model.IActivity.ActionType;
 import com.amundi.social.common.providers.IActivityProvider;
 import com.amundi.social.core.providers.impl.ActivityService;
+import com.amundi.social.repo.dao.impl.CommentDaoImpl;
+import com.amundi.social.repo.dao.impl.FavoriteDaoImpl;
+import com.amundi.social.repo.dao.impl.FollowDaoImpl;
+import com.amundi.social.repo.dao.impl.LikeDaoImpl;
 import com.amundi.social.rest.resources.ICommonRetrievingResource;
 import com.amundi.social.rest.resources.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import net.active.services.server.util.AbstractResource;
 
-public abstract class AbstractCommonRetrievingResource extends AbstractResource implements ICommonRetrievingResource {
+public abstract class AbstractCommonActivityResource extends AbstractResource implements ICommonRetrievingResource {
 	
-	private static final Logger LOGGER = Logger.getLogger(AbstractCommonRetrievingResource.class);
+	private static final Logger LOGGER = Logger.getLogger(AbstractCommonActivityResource.class);
 	
 	private ActionType type;
-	protected IActivityProvider activityService = new ActivityService();
+	protected IActivityProvider activityService = new ActivityService(new LikeDaoImpl(), new FollowDaoImpl(), new FavoriteDaoImpl(), new CommentDaoImpl());
 	
-	public AbstractCommonRetrievingResource(ActionType type) {
+	public AbstractCommonActivityResource(ActionType type) {
 		this.type = type;
 	}
 
