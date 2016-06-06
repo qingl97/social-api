@@ -42,6 +42,18 @@ public class Product implements IProduct {
 		return this.id;
 	}
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+	
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	
 	@Override
 	public String getAppId() {
 		return this.appId;
