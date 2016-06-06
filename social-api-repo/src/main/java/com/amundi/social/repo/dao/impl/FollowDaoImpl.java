@@ -7,7 +7,7 @@ import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IFollowDao;
 import com.amundi.social.repo.dao.mappers.FollowMapper;
 
-public class FollowDaoImpl extends AbstractActivityDao<Follow> implements IFollowDao {
+public class FollowDaoImpl extends GenericCommonActivityDao<Follow> implements IFollowDao {
 
 	public FollowDaoImpl() {
 		super(FollowMapper.class);

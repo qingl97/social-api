@@ -7,7 +7,7 @@ import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IFavoriteDao;
 import com.amundi.social.repo.dao.mappers.FavoriteMapper;
 
-public class FavoriteDaoImpl extends AbstractActivityDao<Favorite> implements IFavoriteDao {
+public class FavoriteDaoImpl extends GenericCommonActivityDao<Favorite> implements IFavoriteDao {
 
 	public FavoriteDaoImpl() {
 		super(FavoriteMapper.class);

@@ -8,7 +8,7 @@ import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.ICommentDao;
 import com.amundi.social.repo.dao.mappers.CommentMapper;
 
-public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICommentDao {
+public class CommentDaoImpl extends GenericCommonActivityDao<Comment> implements ICommentDao {
 	
 	private static final Logger LOGGER = Logger.getLogger(CommentDaoImpl.class);
 

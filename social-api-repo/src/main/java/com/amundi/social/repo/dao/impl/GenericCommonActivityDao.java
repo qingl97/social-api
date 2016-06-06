@@ -9,12 +9,12 @@ import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IGenericActivityDao;
 import com.amundi.social.repo.dao.mappers.GenericActivityMapper;
 
-public abstract class AbstractActivityDao<T> implements IGenericActivityDao<T> {
+public abstract class GenericCommonActivityDao<T> implements IGenericActivityDao<T> {
 	
 	protected Class<? extends GenericActivityMapper<T>> mapper;
 	
 	
-	public AbstractActivityDao(Class<? extends GenericActivityMapper<T>> mapper) {
+	public GenericCommonActivityDao(Class<? extends GenericActivityMapper<T>> mapper) {
 		this.mapper = mapper;
 	}
 
