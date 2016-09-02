@@ -4,12 +4,12 @@ import javax.ws.rs.core.Response;
 
 import com.amundi.social.common.providers.IProductProvider;
 import com.amundi.social.core.providers.impl.ProductService;
-import com.amundi.social.rest.resources.ProductViewResource;
+import com.amundi.social.rest.resources.ProductView;
 import com.amundi.social.rest.resources.util.DefaultJsonResponseBuilder;
 
 import net.active.services.server.util.AbstractResource;
 
-public class ProductViewResourceImpl extends AbstractResource implements ProductViewResource {
+public class ProductViewResourceImpl extends AbstractResource implements ProductView {
 	
 	private IProductProvider productService = new ProductService();
 	

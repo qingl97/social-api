@@ -4,6 +4,8 @@ public class Comment extends AbstractAction {
 	
 	private int note;
 	private String content;
+	private int parent;
+	private int level;
 	
 	@Override
 	public ActionType getType() {
@@ -26,4 +28,19 @@ public class Comment extends AbstractAction {
 		this.note = note;
 	}
 
+	public void setParent(int id) {
+		this.parent = id;
+	}
+
+	public int getParent() {
+		return parent;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 }

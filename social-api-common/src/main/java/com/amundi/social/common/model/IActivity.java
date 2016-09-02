@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface IActivity {
 	
-	public enum ActionType {
+	enum ActionType {
 		LIKE(1), FOLLOW(2), FAVORITE(3), COMMENT(4);
 		
 		private int val;

@@ -41,15 +41,7 @@ public class ActivityService extends AbstractActivityService {
 	@Override
 	public void remove(IActivity activity) {
 		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(activity.getType());
-		List<? extends IActivity> activities = dao.getByUserApplication(activity.getUserId(), activity.getAppId());
-		for(IActivity ac : activities) {
-			if(ac.getProductId().equalsIgnoreCase(activity.getProductId())) {
-				dao.delete(ac);
-				LOGGER.debug("undo " + activity.getType().toString() + " on product " + activity.getProductId() + " of app " + activity.getAppId());
-				return;
-			}
-		}
-		LOGGER.debug("activity not found, operation ignored");
+		dao.delete(activity);
 	}
 	
 	@Override
@@ -68,17 +60,6 @@ public class ActivityService extends AbstractActivityService {
 	}
 	
 	@Override
-	public List<? extends IActivity> getByUser(String userId, String appId, String productId) {
-		List<IActivity> activities = new ArrayList<>();
-		for(ActionType type : ActionType.values()) {
-			IActivity ac = getByUser(userId, appId, productId, type);
-			if(ac != null)
-				activities.add(ac);
-		}
-		return activities;
-	}
-	
-	@Override
 	public IActivity getByUser(String userId, String appId, String productId, ActionType type) {
 		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		List<? extends IActivity> activities = dao.getByProduct(appId, productId);
@@ -90,27 +71,9 @@ public class ActivityService extends AbstractActivityService {
 	}
 	
 	@Override
-	public List<? extends IActivity> getByUser(String userId, String appId) {
-		List<IActivity> activities = new ArrayList<>();
-		for(ActionType type : ActionType.values()) {
-			activities.addAll(getByUser(userId, appId, type));
-		}
-		return activities;
-	}
-	
-	@Override
 	public List<? extends IActivity> getByUser(String userId, String appId, ActionType type) {
 		IGenericActivityDao<? extends IActivity> dao = getConcreteDao(type);
 		return dao.getByUserApplication(userId, appId);
-	}
-	
-	@Override
-	public List<? extends IActivity> getByUser(String userId) {
-		List<IActivity> activities = new ArrayList<>();
-		for(ActionType type : ActionType.values()) {
-			activities.addAll(getByUser(userId, type));
-		}
-		return activities;
 	}
 	
 	@Override

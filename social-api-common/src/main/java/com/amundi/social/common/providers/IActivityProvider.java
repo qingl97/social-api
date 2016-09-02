@@ -14,13 +14,10 @@ public interface IActivityProvider {
 	List<? extends IActivity> getAll();
 	List<? extends IActivity> getAll(ActionType type);
 	
-	List<? extends IActivity> getByUser(String userId, String appId, String productId);
 	IActivity getByUser(String userId, String appId, String productId, ActionType type);
 	
-	List<? extends IActivity> getByUser(String userId);
 	List<? extends IActivity> getByUser(String userId, ActionType type);
 	
-	List<? extends IActivity> getByUser(String userId, String appId);
 	List<? extends IActivity> getByUser(String userId, String appId, ActionType type);
 	
 	List<? extends IActivity> get(String appId);
