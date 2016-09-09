@@ -1,9 +1,9 @@
 package com.amundi.social.repo;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 public class SqlSessionProviderTest {
 

@@ -6,9 +6,12 @@ import javax.ws.rs.container.ContainerRequestContext;
 import com.amundi.services.server.AmundiApplication;
 import com.amundi.services.server.security.AmundiSecurityConfig;
 import com.amundi.services.server.security.authenticator.AmundiLoginContextFinder;
+import com.amundi.social.rest.resources.CommentResource;
+import com.amundi.social.rest.resources.FavoriteResource;
+import com.amundi.social.rest.resources.FollowResource;
+import com.amundi.social.rest.resources.LikeResource;
 import com.amundi.social.rest.resources.impl.ProductViewResourceImpl;
 
-import com.amundi.social.rest.resources.impl.UserActivityImpl;
 import net.active.services.common.security.HttpAuthenticationScheme;
 
 /**
@@ -24,7 +27,10 @@ public class ApiServer extends AmundiApplication {
 		super(APPLICATION_NAME);
 		registerResources(
 				ProductViewResourceImpl.class,
-				UserActivityImpl.class);
+				LikeResource.class,
+				FavoriteResource.class,
+				FollowResource.class,
+				CommentResource.class);
 
 		AmundiSecurityConfig securityConfig = new AmundiSecurityConfig.Builder()
 				.withHttpBasicSessionAuthenticator(new AmundiLoginContextFinder(){

@@ -15,27 +15,23 @@
 	</sql>
 
 	<!-- Selects -->
-	<select id="fetchAll" resultMap="favoriteResult">
+	<select id="getAll" resultMap="favoriteResult">
 		<include refid="all" />
 	</select>
 
-	<select id="fetchByApplication" resultMap="favoriteResult">
+	<select id="getByApp" resultMap="favoriteResult">
 		<include refid="all" /> and app_id = #{appId};
 	</select>
 	
-	<select id="fetchByProduct" resultMap="favoriteResult">
+	<select id="getByAppProduct" resultMap="favoriteResult">
 		<include refid="all" /> and app_id = #{appId} and product_id = #{productId};
 	</select>
 	
-	<select id="fetchByUser" resultMap="favoriteResult">
+	<select id="getByUser" resultMap="favoriteResult">
 		<include refid="all" /> and user_id = #{userId};
 	</select>
 	
-	<select id="fetchByUserApplication" resultMap="favoriteResult"> 
-		<include refid="all" /> and user_id = #{userId} and app_id = #{appId};
-	</select>
-	
-	<select id="fetchByUserProduct" resultMap="favoriteResult"> 
+	<select id="getByUserApp" resultMap="favoriteResult"> 
 		<include refid="all" /> and user_id = #{userId} and app_id = #{appId};
 	</select>
 	
@@ -45,12 +41,11 @@
 	</insert>
 	
 	<!-- Delete -->
-	<delete id="delete">
+	<delete id="remove" parameterType="com.amundi.social.common.model.Favorite">
 		delete from activities where type = 2 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
-	
-	<!-- clear data -->
-	<delete id="clear">
-		delete from activities where type = 2 and app_id = #{appId};
+
+	<delete id="remove" parameterType="int">
+		delete from activities where id = #{activityId};
 	</delete>
 </mapper>

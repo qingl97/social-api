@@ -7,7 +7,8 @@
 		<result property = "appId" column = "app_id" />
 		<result property = "productId" column = "product_id" />
 		<result property = "userId" column = "user_id" />
-		<result property = "timestamp" column = "timestamp" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
+		<result property="timestamp" column="timestamp" javaType="Date"/>
+		<!-- <result property = "timestamp" column = "timestamp" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/> -->
 	</resultMap>
 	
 	<sql id="all">
@@ -15,27 +16,23 @@
 	</sql>
 
 	<!-- Selects -->
-	<select id="fetchAll" resultMap="followResult">
+	<select id="getAll" resultMap="followResult">
 		<include refid="all" />
 	</select>
 
-	<select id="fetchByApplication" resultMap="followResult">
+	<select id="getByApp" resultMap="followResult">
 		<include refid="all" /> and app_id = #{appId};
 	</select>
 	
-	<select id="fetchByProduct" resultMap="followResult">
+	<select id="getByAppProduct" resultMap="followResult">
 		<include refid="all" /> and app_id = #{appId} and product_id = #{productId};
 	</select>
 	
-	<select id="fetchByUser" resultMap="followResult">
+	<select id="getByUser" resultMap="followResult">
 		<include refid="all" /> and user_id = #{userId};
 	</select>
 	
-	<select id="fetchByUserApplication" resultMap="followResult"> 
-		<include refid="all" /> and user_id = #{userId} and app_id = #{appId};
-	</select>
-	
-	<select id="fetchByUserProduct" resultMap="followResult"> 
+	<select id="getByUserApp" resultMap="followResult"> 
 		<include refid="all" /> and user_id = #{userId} and app_id = #{appId};
 	</select>
 	
@@ -45,12 +42,11 @@
 	</insert>
 	
 	<!-- Delete -->
-	<delete id="delete">
+	<delete id="remove" parameterType="com.amundi.social.common.model.Follow">
 		delete from activities where type = 3 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
 	
-	<!-- clear data -->
-	<delete id="clear">
-		delete from activities where type = 3 and app_id = #{appId};
+	<delete id="remove" parameterType="int">
+		delete from activities where id = #{activityId};
 	</delete>
 </mapper>

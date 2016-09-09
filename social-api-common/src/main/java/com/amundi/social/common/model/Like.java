@@ -1,8 +1,8 @@
 package com.amundi.social.common.model;
 
-public class Like extends AbstractAction {
+public class Like extends AbstractActivity {
 	
-	public ActionType getType() {
-		return ActionType.LIKE;
+	public ActivityType getType() {
+		return ActivityType.LIKE;
 	}
 }

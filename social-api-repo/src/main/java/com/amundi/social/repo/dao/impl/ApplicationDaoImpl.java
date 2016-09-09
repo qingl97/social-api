@@ -5,18 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.amundi.social.common.model.Application;
 import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.IApplicationDao;
-import com.amundi.social.repo.dao.ICommentDao;
-import com.amundi.social.repo.dao.IFavoriteDao;
-import com.amundi.social.repo.dao.IFollowDao;
-import com.amundi.social.repo.dao.ILikeDao;
 import com.amundi.social.repo.dao.mappers.ApplicationMapper;
 
 public class ApplicationDaoImpl implements IApplicationDao {
-	
-	private ILikeDao likeDao = new LikeDaoImpl();
-	private IFollowDao followDao = new FollowDaoImpl();
-	private IFavoriteDao favoriteDao = new FavoriteDaoImpl();
-	private ICommentDao commentDao = new CommentDaoImpl();
 
 	@Override
 	public Application get(String appId) {

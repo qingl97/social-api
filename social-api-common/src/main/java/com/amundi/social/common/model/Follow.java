@@ -1,10 +1,10 @@
 package com.amundi.social.common.model;
 
-public class Follow extends AbstractAction {
+public class Follow extends AbstractActivity {
 
 	@Override
-	public ActionType getType() {
-		return ActionType.FOLLOW;
+	public ActivityType getType() {
+		return ActivityType.FOLLOW;
 	}
 
 }

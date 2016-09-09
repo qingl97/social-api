@@ -1,14 +1,14 @@
 package com.amundi.social.common.model;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
-public abstract class AbstractAction implements IActivity {
+public abstract class AbstractActivity implements IActivity {
 
 	private int id;
 	private String appId;
 	private String productId;
 	private String userId;
-	private DateTime timestamp;
+	private Date timestamp;
 	
 	@Override
 	public int getId() {
@@ -47,11 +47,11 @@ public abstract class AbstractAction implements IActivity {
 	}
 	
 	@Override
-	public DateTime getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 	
-	public void setTimestamp(DateTime ts) {
+	public void setTimestamp(Date ts) {
 		this.timestamp = ts;
 	}
 }

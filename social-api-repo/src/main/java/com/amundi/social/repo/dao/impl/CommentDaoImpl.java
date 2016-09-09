@@ -8,7 +8,7 @@ import com.amundi.social.repo.SqlSessionProvider;
 import com.amundi.social.repo.dao.ICommentDao;
 import com.amundi.social.repo.dao.mappers.CommentMapper;
 
-public class CommentDaoImpl extends GenericCommonActivityDao<Comment> implements ICommentDao {
+public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICommentDao {
 	
 	private static final Logger LOGGER = Logger.getLogger(CommentDaoImpl.class);
 
@@ -17,11 +17,12 @@ public class CommentDaoImpl extends GenericCommonActivityDao<Comment> implements
 	}
 	
 	@Override
-	public void add(Comment cmt) {
+	public void addComment(Comment cmt) {
 		SqlSession session = null;
+		int activityId = 0;
 		try {
 			session = SqlSessionProvider.openSession();
-			session.getMapper(CommentMapper.class).addActivity(cmt);
+			activityId = session.getMapper(mapper).add(cmt);
 			session.commit();
 			session.getMapper(CommentMapper.class).addNoteContent(cmt);
 			session.commit();
@@ -29,7 +30,7 @@ public class CommentDaoImpl extends GenericCommonActivityDao<Comment> implements
 			// To insert a comment in database, first insert a record in table 'activities'; then 
 			// insert a record in table 'comments'. Since the id for the newly inserted activity 
 			// for this comment is not yet generated until the transation commits, the second insert
-			// will fail due to the foreign key constraint (on delete cascade, on update cascade) 
+			// will fail due to the foreign key constraint (on remove cascade, on update cascade)
 			// that 'comments' have a foreign key 'activity_id' which references the column 'id' 
 			// in 'activities'.
 			// Here we make the insertion of comment to happen in two transations and the new activity 
@@ -37,9 +38,19 @@ public class CommentDaoImpl extends GenericCommonActivityDao<Comment> implements
 			LOGGER.error(e.getMessage(), e);
 			if(session == null)
 				session = SqlSessionProvider.openSession();
-			session.getMapper(CommentMapper.class).delete(cmt);
+			if(activityId != 0)
+				session.getMapper(mapper).remove(activityId);
 		} finally {
 			session.close();
+		}
+	}
+
+	@Override
+	public void removeComment(int commentId) {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
+			int activityId = session.getMapper(CommentMapper.class).getActivityId(commentId);
+			session.getMapper(mapper).remove(activityId);
+			session.commit();
 		}
 	}
 }

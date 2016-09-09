@@ -1,10 +1,10 @@
 package com.amundi.social.common.model;
 
-public class Favorite extends AbstractAction {
+public class Favorite extends AbstractActivity {
 	
 	@Override
-	public ActionType getType() {
-		return ActionType.FAVORITE;
+	public ActivityType getType() {
+		return ActivityType.FAVORITE;
 	}
 
 }

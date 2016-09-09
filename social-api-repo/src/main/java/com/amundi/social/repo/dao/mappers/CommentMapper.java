@@ -2,8 +2,9 @@ package com.amundi.social.repo.dao.mappers;
 
 import com.amundi.social.common.model.Comment;
 
-public interface CommentMapper extends GenericActivityMapper<Comment> {
+public interface CommentMapper extends CommonActivityMapper<Comment> {
 
-	int addActivity(Comment fav);
 	int addNoteContent(Comment fav);
+	void delete(int commentId);
+	int getActivityId(int commentId);
 }

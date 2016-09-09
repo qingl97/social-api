@@ -7,7 +7,7 @@
 		<result property = "appId" column = "app_id" />
 		<result property = "productId" column = "product_id" />
 		<result property = "userId" column = "user_id" />
-		<result property = "timestamp" column = "timestamp" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
+		<result property = "timestamp" column = "timestamp" javaType="date"/>
 	</resultMap>
 	
 	<sql id="allLikes">
@@ -15,23 +15,23 @@
 	</sql>
 
 	<!-- Selects -->
-	<select id="fetchAll" resultMap="result">
+	<select id="getAll" resultMap="result">
 		<include refid="allLikes" />
 	</select>
 
-	<select id="fetchByApplication" resultMap="result">
+	<select id="getByApp" resultMap="result">
 		<include refid="allLikes" /> and app_id = #{appId};
 	</select>
 	
-	<select id="fetchByProduct" resultMap="result">
+	<select id="getByAppProduct" resultMap="result">
 		<include refid="allLikes" /> and app_id = #{appId} and product_id = #{productId};
 	</select>
 	
-	<select id="fetchByUser" resultMap="result">
+	<select id="getByUser" resultMap="result">
 		<include refid="allLikes" /> and user_id = #{userId};
 	</select>
 	
-	<select id="fetchByUserApplication" resultMap="result"> 
+	<select id="getByUserApp" resultMap="result"> 
 		<include refid="allLikes" /> and user_id = #{userId} and app_id = #{appId};
 	</select>
 	
@@ -41,12 +41,11 @@
 	</insert>
 	
 	<!-- Delete -->
-	<delete id="delete">
+	<delete id="remove" parameterType="com.amundi.social.common.model.Like">
 		delete from activities where type = 1 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
-	
-	<!-- clear data -->
-	<delete id="clear">
-		delete from activities where type = 1 and app_id = #{appId};
+
+	<delete id="remove" parameterType="int">
+		delete from activities where id = #{activityId};
 	</delete>
 </mapper>

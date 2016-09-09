@@ -2,7 +2,8 @@ package com.amundi.social.repo.dao;
 
 import com.amundi.social.common.model.Comment;
 
-public interface ICommentDao extends IGenericActivityDao<Comment> {
+public interface ICommentDao extends IActivityDao<Comment>{
 
-	void add(Comment cmt);
+	void addComment(Comment comment);
+	void removeComment(int commentId);
 }

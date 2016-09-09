@@ -1,15 +1,24 @@
 package com.amundi.social.common.model;
 
-public class Comment extends AbstractAction {
+public class Comment extends AbstractActivity {
 	
+	private int commentId;
 	private int note;
 	private String content;
 	private int parent;
 	private int level;
 	
 	@Override
-	public ActionType getType() {
-		return ActionType.COMMENT;
+	public ActivityType getType() {
+		return ActivityType.COMMENT;
+	}
+	
+	public int getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
 	}
 	
 	public String getContent() {
