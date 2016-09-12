@@ -8,7 +8,7 @@
 		<result property = "id" column = "id" />
 		<result property = "creatorId" column = "user_id" />
 		<result property = "description" column = "description" />
-		<result property = "timeCreated" column = "creation_date" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
+		<result property = "timeCreated" column = "creation_date" javaType="Date"/>
 	</resultMap>
 
 	<select id="get" parameterType="string" resultMap="result">

@@ -46,7 +46,7 @@
 		delete from activities where type = 3 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
 	
-	<delete id="remove" parameterType="int">
+	<delete id="removeByActivityId" parameterType="int">
 		delete from activities where id = #{activityId};
 	</delete>
 </mapper>

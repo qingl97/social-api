@@ -3,6 +3,7 @@ package com.amundi.social.rest.application;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.container.ContainerRequestContext;
 
+import com.amundi.services.common.util.jackson.AmundiObjectMapper;
 import com.amundi.services.server.AmundiApplication;
 import com.amundi.services.server.security.AmundiSecurityConfig;
 import com.amundi.services.server.security.authenticator.AmundiLoginContextFinder;
@@ -31,6 +32,8 @@ public class ApiServer extends AmundiApplication {
 				FavoriteResource.class,
 				FollowResource.class,
 				CommentResource.class);
+		
+		registerObjectMapper(new AmundiObjectMapper());
 
 		AmundiSecurityConfig securityConfig = new AmundiSecurityConfig.Builder()
 				.withHttpBasicSessionAuthenticator(new AmundiLoginContextFinder(){

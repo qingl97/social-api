@@ -1,13 +1,13 @@
 package com.amundi.social.common.model;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
 public class Application {
 
 	private String id;
 	private String creatorId;
 	private String description;
-	private DateTime timeCreated;
+	private Date timeCreated;
 
 	public String getId() {
 		return id;
@@ -33,11 +33,11 @@ public class Application {
 		this.description = description;
 	}
 
-	public DateTime getTimeCreated() {
+	public Date getTimeCreated() {
 		return timeCreated;
 	}
 
-	public void setTimeCreated(DateTime timeCreated) {
+	public void setTimeCreated(Date timeCreated) {
 		this.timeCreated = timeCreated;
 	}
 

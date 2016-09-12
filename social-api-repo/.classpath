@@ -6,8 +6,16 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="conf/dev/|conf/|com/amundi/social/repo/dao/mappers/|com/amundi/social/repo/dao/|com/amundi/social/repo/|com/amundi/social/|com/amundi/|com/" kind="src" path="src/main/resources"/>
-	<classpathentry excluding="com/amundi/social/repo/dao/mappers/|com/amundi/social/repo/dao/|com/amundi/social/repo/|com/amundi/social/|com/amundi/|com/|conf/dev/|conf/" kind="src" path="src/test/resources"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -23,6 +31,11 @@
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="config/dev">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

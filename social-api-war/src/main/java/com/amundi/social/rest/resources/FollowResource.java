@@ -28,7 +28,7 @@ public class FollowResource extends AbstractActivityResource<Follow> {
 	}
 	
 	@PUT
-    @Path("{appId}")
+    @Path("{appId}/{productId}")
     public Response add(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId) {
     	if(userId == null || userId.trim().isEmpty()) {
     		return Response.status(Status.BAD_REQUEST).build();

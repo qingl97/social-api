@@ -64,7 +64,7 @@ public abstract class AbstractActivityDao<T extends IActivity> implements IActiv
 	@Override
 	public void removeActivity(int activityId) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
-			session.getMapper(mapper).remove(activityId);
+			session.getMapper(mapper).removeByActivityId(activityId);
 			session.commit();
 		}
 	}

@@ -39,7 +39,7 @@ public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICom
 			if(session == null)
 				session = SqlSessionProvider.openSession();
 			if(activityId != 0)
-				session.getMapper(mapper).remove(activityId);
+				session.getMapper(mapper).removeByActivityId(activityId);
 		} finally {
 			session.close();
 		}
@@ -49,7 +49,7 @@ public class CommentDaoImpl extends AbstractActivityDao<Comment> implements ICom
 	public void removeComment(int commentId) {
 		try(SqlSession session = SqlSessionProvider.openSession()) {
 			int activityId = session.getMapper(CommentMapper.class).getActivityId(commentId);
-			session.getMapper(mapper).remove(activityId);
+			session.getMapper(mapper).removeByActivityId(activityId);
 			session.commit();
 		}
 	}

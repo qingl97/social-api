@@ -9,7 +9,7 @@
 		<result property = "userId" column = "user_id" />
 		<result property = "note" column = "note" javaType="int"/>
 		<result property = "content" column = "content" javaType="string"/>
-		<result property = "timestamp" column = "timestamp" javaType="org.joda.time.DateTime" typeHandler="com.amundi.social.repo.dao.util.JodaDateTimeTypeHandler"/>
+		<result property = "timestamp" column = "timestamp" javaType="Date"/>
 	</resultMap>
 	
 	<sql id="all">
@@ -54,7 +54,7 @@
 		delete from activities where type = 4 and app_id = #{appId} and product_id = #{productId} and user_id = #{userId};
 	</delete>
 
-	<delete id="remove" parameterType="int">
+	<delete id="removeByActivityId" parameterType="int">
 		delete from activities where id = #{activityId};
 	</delete>
 </mapper>

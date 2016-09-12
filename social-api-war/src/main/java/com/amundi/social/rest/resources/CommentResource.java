@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -36,12 +36,12 @@ public class CommentResource extends AbstractActivityResource<Comment> {
 		this.commentService = (CommentService) super.activityService;
 	}
 	
-	@PUT
-    @Path("{appId}")
+	@POST
+    @Path("{appId}/{productId}")
 	@Consumes(MediaType.APPLICATION_JSON)
     public Response add(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId, final CommentBody commentBody) {
     	if(userId == null || userId.trim().isEmpty()) {
-    		return Response.status(Status.BAD_REQUEST).build();
+    		return Response.status(Status.ACCEPTED).build();
     	}
     	Comment comment = new Comment();
     	comment.setAppId(appId);
@@ -56,7 +56,7 @@ public class CommentResource extends AbstractActivityResource<Comment> {
 
     @DELETE
     @Path("{appId}/{productId}")
-    public Response remove(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId, final CommentBody commentBody) {
+    public Response remove(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId) {
     	if(userId == null || userId.trim().isEmpty()) {
     		return Response.status(Status.BAD_REQUEST).build();
     	}

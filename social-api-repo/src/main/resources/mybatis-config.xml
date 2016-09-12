@@ -23,6 +23,12 @@
 	</environments>
 	
 	<mappers>
-		<package name="com.amundi.social.repo.dao.mappers"/>
+		<!-- <package name="com.amundi.social.repo.dao.mappers"/> -->
+		<mapper class="com.amundi.social.repo.dao.mappers.ApplicationMapper"/>
+		<mapper class="com.amundi.social.repo.dao.mappers.ProductMapper"/>
+		<mapper class="com.amundi.social.repo.dao.mappers.FavoriteMapper"/>
+		<mapper class="com.amundi.social.repo.dao.mappers.FollowMapper"/>
+		<mapper class="com.amundi.social.repo.dao.mappers.LikeMapper"/>
+		<mapper class="com.amundi.social.repo.dao.mappers.CommentMapper"/>
 	</mappers>
 </configuration>

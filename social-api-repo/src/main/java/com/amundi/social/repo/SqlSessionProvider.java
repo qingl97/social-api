@@ -20,12 +20,14 @@ public class SqlSessionProvider {
 	
 	static {
 		try {
-			if(sqlSessionFactory == null)
+			if(sqlSessionFactory == null) {
 				synchronized(SqlSessionProvider.class) {
 					InputStream inputStream = Resources.getResourceAsStream(MYBATIS_CONFIG);
 					sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 					inputStream.close();
 				}
+				LOGGER.info("SqlSessionFactory initialized");
+			}
 		} catch (IOException e) {
 			LOGGER.error("failed reading mybatis configuration mybatis-config.xml");
 			throw new SqlSessionFactoryInitFailedException(e);

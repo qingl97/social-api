@@ -9,7 +9,7 @@ import java.util.List;
 public interface CommonActivityMapper<T> {
 	
 	int add(IActivity activity);
-	void remove(@Param("activityId") int activityId);
+	void removeByActivityId(@Param("activityId") int activityId);
 	void remove(IActivity activity);
 	List<T> getAll();
 	List<T> getByApp(@Param("appId") String appId);
