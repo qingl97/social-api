@@ -1,12 +1,15 @@
 package com.amundi.social.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Comment extends AbstractActivity {
 	
+	@JsonIgnore
 	private int commentId;
 	private int note;
 	private String content;
-	private int parent;
-	private int level;
+//	private int parent;
+//	private int level;
 	
 	@Override
 	public ActivityType getType() {
@@ -37,19 +40,19 @@ public class Comment extends AbstractActivity {
 		this.note = note;
 	}
 
-	public void setParent(int id) {
-		this.parent = id;
-	}
-
-	public int getParent() {
-		return parent;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
+//	public void setParent(int id) {
+//		this.parent = id;
+//	}
+//
+//	public int getParent() {
+//		return parent;
+//	}
+//
+//	public int getLevel() {
+//		return level;
+//	}
+//
+//	public void setLevel(int level) {
+//		this.level = level;
+//	}
 }

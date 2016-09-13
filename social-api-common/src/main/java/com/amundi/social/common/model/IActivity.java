@@ -7,7 +7,7 @@ import java.util.Date;
 
 public interface IActivity {
 	
-	@JsonIgnore
+	@JsonProperty("activity_id")
 	int getId();
 	@JsonIgnore
 	ActivityType getType();

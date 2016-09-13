@@ -18,7 +18,8 @@ public abstract class AbstractActivityService<T extends IActivity> implements IA
 		this.activityDao = activityDao;
 	}
 	
-	public void add(IActivity activity) {
+	@Override
+	public void addActivity(IActivity activity) {
 		List<? extends IActivity> activities = activityDao.getActivitiesByUserApp(activity.getUserId(), activity.getAppId());
 		for(IActivity ac : activities) {
 			if(ac.getProductId().equalsIgnoreCase(activity.getProductId())) {
@@ -30,12 +31,12 @@ public abstract class AbstractActivityService<T extends IActivity> implements IA
 	}
 
 	@Override
-	public void remove(IActivity activity) {
+	public void removeActivity(IActivity activity) {
 		activityDao.removeActivity(activity);
 	}
 	
 	@Override
-	public void remove(int activityId) {
+	public void removeActivity(int activityId) {
 		activityDao.removeActivity(activityId);
 	}
 

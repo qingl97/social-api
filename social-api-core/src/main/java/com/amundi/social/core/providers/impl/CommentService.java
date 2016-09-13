@@ -8,7 +8,14 @@ import com.amundi.social.repo.dao.ICommentDao;
  */
 public class CommentService extends AbstractActivityService<Comment> {
 	
+	private ICommentDao commentDao;
+	
 	public CommentService(ICommentDao dao) {
 		super(dao);
+		commentDao = dao;
+	}
+	
+	public void addComment(Comment cmt) {
+		commentDao.addComment(cmt);
 	}
 }

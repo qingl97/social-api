@@ -1,5 +1,7 @@
 package com.amundi.social.repo.dao.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.amundi.social.common.model.Application;
@@ -32,4 +34,10 @@ public class ApplicationDaoImpl implements IApplicationDao {
 		}
 	}
 
+	@Override
+	public List<Application> get() {
+		try(SqlSession session = SqlSessionProvider.openSession()) {
+			return session.getMapper(ApplicationMapper.class).getAll();
+		}
+	}
 }

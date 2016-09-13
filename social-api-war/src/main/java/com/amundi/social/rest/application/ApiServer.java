@@ -7,11 +7,12 @@ import com.amundi.services.common.util.jackson.AmundiObjectMapper;
 import com.amundi.services.server.AmundiApplication;
 import com.amundi.services.server.security.AmundiSecurityConfig;
 import com.amundi.services.server.security.authenticator.AmundiLoginContextFinder;
+import com.amundi.social.rest.resources.ApplicationResource;
 import com.amundi.social.rest.resources.CommentResource;
 import com.amundi.social.rest.resources.FavoriteResource;
 import com.amundi.social.rest.resources.FollowResource;
 import com.amundi.social.rest.resources.LikeResource;
-import com.amundi.social.rest.resources.impl.ProductViewResourceImpl;
+import com.amundi.social.rest.resources.ProductResource;
 
 import net.active.services.common.security.HttpAuthenticationScheme;
 
@@ -27,7 +28,8 @@ public class ApiServer extends AmundiApplication {
 	public ApiServer() {
 		super(APPLICATION_NAME);
 		registerResources(
-				ProductViewResourceImpl.class,
+				ApplicationResource.class,
+				ProductResource.class,
 				LikeResource.class,
 				FavoriteResource.class,
 				FollowResource.class,

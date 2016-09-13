@@ -38,7 +38,7 @@ public class FavoriteResource extends AbstractActivityResource<Favorite> {
     	favorite.setProductId(productId);
     	favorite.setUserId(userId);
     	favorite.setTimestamp(new Date());
-    	favoriteService.add(favorite);
+    	favoriteService.addActivity(favorite);
     	return Response.ok().build();
     }
 
@@ -53,7 +53,7 @@ public class FavoriteResource extends AbstractActivityResource<Favorite> {
     	favorite.setProductId(productId);
     	favorite.setUserId(userId);
     	favorite.setTimestamp(new Date());
-    	favoriteService.remove(favorite);
+    	favoriteService.removeActivity(favorite);
     	return Response.ok().build();
     }
 

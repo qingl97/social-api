@@ -41,7 +41,7 @@ public class LikeResource extends AbstractActivityResource<Like> {
     	like.setProductId(productId);
     	like.setUserId(userId);
     	like.setTimestamp(new Date());
-    	likeService.add(like);
+    	likeService.addActivity(like);
     	return Response.ok().build();
     }
 
@@ -56,7 +56,7 @@ public class LikeResource extends AbstractActivityResource<Like> {
     	like.setProductId(productId);
     	like.setUserId(userId);
     	like.setTimestamp(new Date());
-    	likeService.remove(like);
+    	likeService.removeActivity(like);
     	return Response.ok().build();
     }
 }

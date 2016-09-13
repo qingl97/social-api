@@ -37,7 +37,7 @@
 	
 	<!-- Insert -->
 	<insert id="add" parameterType="com.amundi.social.common.model.Like" useGeneratedKeys="true" keyProperty="id">
-		insert into activities (type, app_id, product_id, user_id) values (1, #{appId}, #{productId}, #{userId});
+		insert into activities (type, app_id, product_id, user_id, timestamp) values (1, #{appId}, #{productId}, #{userId}, #{timestamp});
 	</insert>
 	
 	<!-- Delete -->

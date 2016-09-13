@@ -41,8 +41,8 @@
 	</select>
 	
 	<!-- Insert -->
-	<insert id="addActivity" parameterType="com.amundi.social.common.model.Comment" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		insert into activities (type, app_id, product_id, user_id) values (4, #{appId}, #{productId}, #{userId});
+	<insert id="add" parameterType="com.amundi.social.common.model.Comment" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into activities (type, app_id, product_id, user_id, timestamp) values (4, #{appId}, #{productId}, #{userId}, #{timestamp});
 	</insert>
 	
 	<insert id="addNoteContent" parameterType="com.amundi.social.common.model.Comment" useGeneratedKeys="true" keyProperty="commentId" keyColumn="id">

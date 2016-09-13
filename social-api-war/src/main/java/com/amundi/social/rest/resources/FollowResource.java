@@ -38,7 +38,7 @@ public class FollowResource extends AbstractActivityResource<Follow> {
     	follow.setProductId(productId);
     	follow.setUserId(userId);
     	follow.setTimestamp(new Date());
-    	followService.add(follow);
+    	followService.addActivity(follow);
     	return Response.ok().build();
     }
 
@@ -53,7 +53,7 @@ public class FollowResource extends AbstractActivityResource<Follow> {
     	follow.setProductId(productId);
     	follow.setUserId(userId);
     	follow.setTimestamp(new Date());
-    	followService.remove(follow);
+    	followService.removeActivity(follow);
     	return Response.ok().build();
     }
 

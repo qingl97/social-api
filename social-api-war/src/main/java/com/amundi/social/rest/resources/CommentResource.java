@@ -1,11 +1,13 @@
 package com.amundi.social.rest.resources;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,7 +26,7 @@ import com.amundi.social.repo.dao.impl.CommentDaoImpl;
 public class CommentResource extends AbstractActivityResource<Comment> {
 	
 	@XmlRootElement
-    class CommentBody {
+    public static class CommentBody {
         @XmlElement public int note;
         @XmlElement public String content;
     }
@@ -36,27 +38,10 @@ public class CommentResource extends AbstractActivityResource<Comment> {
 		this.commentService = (CommentService) super.activityService;
 	}
 	
-	@POST
+	@PUT
     @Path("{appId}/{productId}")
 	@Consumes(MediaType.APPLICATION_JSON)
     public Response add(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId, final CommentBody commentBody) {
-    	if(userId == null || userId.trim().isEmpty()) {
-    		return Response.status(Status.ACCEPTED).build();
-    	}
-    	Comment comment = new Comment();
-    	comment.setAppId(appId);
-    	comment.setProductId(productId);
-    	comment.setUserId(userId);
-    	comment.setTimestamp(new Date());
-    	comment.setContent(commentBody.content);
-    	comment.setNote(commentBody.note);
-    	commentService.add(comment);
-    	return Response.ok().build();
-    }
-
-    @DELETE
-    @Path("{appId}/{productId}")
-    public Response remove(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId) {
     	if(userId == null || userId.trim().isEmpty()) {
     		return Response.status(Status.BAD_REQUEST).build();
     	}
@@ -65,7 +50,25 @@ public class CommentResource extends AbstractActivityResource<Comment> {
     	comment.setProductId(productId);
     	comment.setUserId(userId);
     	comment.setTimestamp(new Date());
-    	commentService.remove(comment);
+    	comment.setContent(commentBody.content);
+    	comment.setNote(commentBody.note);
+    	commentService.addComment(comment);
+    	return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("{appId}/{productId}/{timestamp}")
+    public Response remove(@HeaderParam("userId") String userId, @PathParam("appId") String appId, @PathParam("productId") String productId, @PathParam("timestamp") String ts) throws ParseException {
+    	if(userId == null || userId.trim().isEmpty()) {
+    		return Response.status(Status.BAD_REQUEST).build();
+    	}
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZ");
+    	Comment comment = new Comment();
+    	comment.setAppId(appId);
+    	comment.setProductId(productId);
+    	comment.setUserId(userId);
+    	comment.setTimestamp(formatter.parse(ts));
+    	commentService.removeActivity(comment);
     	return Response.ok().build();
     }
 

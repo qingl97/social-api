@@ -1,5 +1,7 @@
 package com.amundi.social.core.providers.impl;
 
+import java.util.List;
+
 import com.amundi.social.common.model.Application;
 import com.amundi.social.common.providers.IApplicationProvider;
 import com.amundi.social.repo.dao.IApplicationDao;
@@ -27,5 +29,10 @@ public class ApplicationService implements IApplicationProvider {
 	@Override
 	public void delete(String appId) {
 		dao.delete(appId);
+	}
+
+	@Override
+	public List<Application> getApps() {
+		return dao.get();
 	}
 }

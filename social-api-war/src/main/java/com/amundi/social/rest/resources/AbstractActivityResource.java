@@ -26,7 +26,7 @@ public abstract class AbstractActivityResource<T extends IActivity> extends Abst
 	@DELETE
 	@Path("{activityId}")
 	public Response remove(@PathParam("activityId") int activityId) {
-    	activityService.remove(activityId);
+    	activityService.removeActivity(activityId);
     	return Response.ok().build();
     }
 

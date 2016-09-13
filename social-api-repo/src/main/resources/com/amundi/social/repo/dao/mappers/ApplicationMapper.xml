@@ -14,13 +14,18 @@
 	<select id="get" parameterType="string" resultMap="result">
 		select * from applications where id = #{appId};
 	</select>
+	
+	<select id="getAll" resultMap="result">
+		select * from applications;
+	</select>
+	
 	<!-- Insert -->
 	<insert id="add" parameterType="com.amundi.social.common.model.Application" keyProperty="id">
-		insert into applications (id, user_id, description) values (#{appId}, #{userId}, #{desc})
+		insert into applications (id, user_id, description) values (#{appId}, #{userId}, #{desc});
 	</insert>
 	
 	<!-- Delete -->
-	<delete id="delete">
+	<delete id="delete" parameterType="string">
 		delete from applications where id = #{appId};
 	</delete>
 </mapper>

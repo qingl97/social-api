@@ -6,10 +6,10 @@ import com.amundi.social.common.model.IActivity;
 
 public interface IActivityProvider {
 	
-	void add(IActivity activity);
+	void addActivity(IActivity activity);
 	
-	void remove(IActivity activity);
-	void remove(int activityId);
+	void removeActivity(IActivity activity);
+	void removeActivity(int activityId);
 	
 	List<? extends IActivity> getAll();
 	List<? extends IActivity> getByUser(String userId);
